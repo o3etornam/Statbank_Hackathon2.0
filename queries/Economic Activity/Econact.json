@@ -1,0 +1,60 @@
+{
+    "query": [
+      {
+        "code": "Econact",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Employed",
+            "Worked",
+            "Did not work but had a job",
+            "Unemployed",
+            "Available but not seeking work",
+            "First time job seeker",
+            "Worked previously & seeking work",
+            "Outside Labour Force"
+          ]
+        }
+      },
+      {
+        "code": "Education",
+        "selection": {
+          "filter": "item",
+          "values": [
+        
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+          
+          ]
+        }
+      },
+      {
+        "code": "Sex",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Male",
+            "Female"
+          ]
+        }
+      },
+      {
+        "code": "Age",
+        "selection": {
+          "filter": "item",
+          "values": [
+
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

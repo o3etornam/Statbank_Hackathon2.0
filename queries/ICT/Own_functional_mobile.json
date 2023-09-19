@@ -1,0 +1,75 @@
+{
+    "query": [
+      {
+        "code": "Own_functional_mobile",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Both smart and non smart phone",
+            "Smart phone only",
+            "Non Smart phone only"
+          ]
+        }
+      },
+      {
+        "code": "Education",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Never attended",
+            "Primary",
+            "Secondary",
+            "Tertiary - Bachelor's Degree"
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Ghana",
+            "Western",
+            "Central",
+            "Greater Accra",
+            "Volta",
+            "Eastern",
+            "Ashanti",
+            "Western North",
+            "Ahafo",
+            "Bono",
+            "Bono East",
+            "Oti",
+            "Northern",
+            "Savannah",
+            "North East",
+            "Upper East",
+            "Upper West"
+          ]
+        }
+      },
+      {
+        "code": "Sex",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Male",
+            "Female"
+          ]
+        }
+      },
+      {
+        "code": "Age",
+        "selection": {
+          "filter": "item",
+          "values": [
+  
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }
+  
