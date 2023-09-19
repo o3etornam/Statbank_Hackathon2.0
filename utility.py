@@ -3,6 +3,8 @@ import json
 import streamlit as st
 import pandas as pd
 import features
+import pandasai
+import openai
 
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
