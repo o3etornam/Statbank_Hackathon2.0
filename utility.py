@@ -3,11 +3,13 @@ import json
 import streamlit as st
 import pandas as pd
 import features
-import pandasai
-import openai
+from pandasai import SmartDataframe
+from pandasai.llm import OpenAI
+import os
 
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
+api_key = os.getenv("OPENAI_API_KEY")
 
 @st.cache_data
 def api_reader(url, query):
@@ -78,3 +80,11 @@ def data_filter(dataset,w_variable, title):
     age_group = st.multiselect('Which Age group will you like to filter by', filtered_df['Age'].unique())
 
     return filtered_df,location, education, gender, age_group 
+
+llm = OpenAI(api_token=api_key)
+
+def query_df(df,llm = llm):
+    df = SmartDataframe(df, config={"llm": llm})
+    st.header('Chat With The Data Powered by OpenAI')
+    prompt = st.text_area('What would you like to know')
+    return df.chat(prompt)
