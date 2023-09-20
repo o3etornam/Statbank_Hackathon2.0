@@ -297,8 +297,6 @@ districts = [
           "Nandom"
         ]
 
-country = ['Ghana']
-
 education = [
         "Never attended",
           "Nursery",
