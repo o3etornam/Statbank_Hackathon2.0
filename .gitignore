@@ -1,1 +1,6 @@
-__pycache__/
+.gitignore
+__pycache__
+.streamlit
+pandasai.log
+cache
+exports
