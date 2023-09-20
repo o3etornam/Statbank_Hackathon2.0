@@ -4,14 +4,13 @@ import pandas as pd
 import plotly.express as px
 import features, warehouse
 
-st.title('Visualize any PHC 2021 Data of your Choice')
+st.title('Visualize any Economic Activity Data of your Choice')
 
-category = st.sidebar.selectbox('Which PHC 2021 data will you like to visualize', warehouse.categories)
-query_semi_path = f'{category}/'
+query_semi_path = 'Economic Activity/'
 
 st.header('Build API Query')
 
-selected_cat = warehouse.warehouse[category]
+selected_cat = warehouse.warehouse['Economic Activity']
 
 dataset = query_builder(features= features, age = features.age_group_1,
                         warehouse=selected_cat, query_semi_path=query_semi_path)
