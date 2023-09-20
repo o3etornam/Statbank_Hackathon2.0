@@ -86,9 +86,8 @@ def data_filter(dataset,w_variable, title):
 
 llm = OpenAI(api_token=api_key)
 
-def query_df(df,llm = llm):
+@st.cache_resource
+def query_df(df,prompt,llm = llm):
     df = SmartDataframe(df, config={"llm": llm})
-    st.header('Chat With The Data Powered by OpenAI')
-    prompt = st.text_input('What would you like to know')
     if prompt:
         return st.write(df.chat(prompt))

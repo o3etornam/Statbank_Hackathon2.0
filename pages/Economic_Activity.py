@@ -22,10 +22,14 @@ filtered_df, location, education, gender, age_group = data_filter(dataset=datase
                                                      w_variable=w_variable,
                                                        title= '')
 
+st.header('Chat With The Data Powered by OpenAI')
+prompt = st.text_input('What would you like to know')
 
-query_df(dataset)
+query_df(dataset, prompt)
 
 csv = convert_df(dataset)
+
+st.subheader('Download Dataset as CSV')
 st.download_button(
     'Download data as CSV',
     data = csv,
