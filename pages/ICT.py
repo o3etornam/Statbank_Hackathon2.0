@@ -28,5 +28,5 @@ csv = convert_df(dataset)
 st.download_button(
     'Download data as CSV',
     data = csv,
-    file_name= f'{w_variable}.csv'
+    file_name= f'Economic_Activity.csv'
 )
