@@ -4,14 +4,17 @@ import pandas as pd
 import plotly.express as px
 import features, warehouse
 
-st.title('Visualize any Economic Activity Datasets of your Choice')
+st.title('Visualize any PHC 2021 Data of your Choice')
+
+category = st.sidebar.selectbox('Which PHC 2021 data will you like to visualize', warehouse.categories)
+query_semi_path = f'{category}/'
+
 st.header('Build API Query')
 
-query_semi_path = 'Economic Activity/'
-category = warehouse.warehouse['Economic Activity']
+selected_cat = warehouse.warehouse[category]
 
 dataset = query_builder(features= features, age = features.age_group_1,
-                        warehouse=category, query_semi_path=query_semi_path)
+                        warehouse=selected_cat, query_semi_path=query_semi_path)
 
 st.header('Filter Data for Visualization')
 w_variable = dataset.columns[0]
@@ -21,9 +24,7 @@ filtered_df, location, education, gender, age_group = data_filter(dataset=datase
                                                        title= '')
 
 
-query_df(df = dataset)
-
-
+query_df(dataset)
 
 csv = convert_df(dataset)
 st.download_button(

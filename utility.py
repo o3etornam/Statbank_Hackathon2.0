@@ -87,4 +87,5 @@ def query_df(df,llm = llm):
     df = SmartDataframe(df, config={"llm": llm})
     st.header('Chat With The Data Powered by OpenAI')
     prompt = st.text_area('What would you like to know')
-    return df.chat(prompt)
+    if prompt:
+        return st.write(df.chat(prompt))
