@@ -1,5 +1,5 @@
 import streamlit as st
-from utility import query_builder, convert_df, data_filter, query_df
+from utility import query_builder, convert_df, filter_and_plot, query_df
 import pandas as pd
 import plotly.express as px
 import features, warehouse
@@ -15,17 +15,14 @@ selected_cat = warehouse.warehouse['Economic Activity']
 dataset = query_builder(features= features, age = features.age_group_1,
                         warehouse=selected_cat, query_semi_path=query_semi_path)
 
+st.subheader('Dataset Extracted with API Query')
+st.dataframe(dataset)
+
 st.header('Filter Data for Visualization')
 w_variable = dataset.columns[0]
+count = dataset.columns[-1]
 
-filtered_df, location, education, gender, age_group = data_filter(dataset=dataset, 
-                                                     w_variable=w_variable,
-                                                       title= '')
-
-st.header('Chat With The Data Powered by OpenAI')
-prompt = st.text_input('What would you like to know')
-
-query_df(dataset, prompt)
+filter_and_plot(dataset = dataset,w_variable = w_variable,count = count ,title = '')
 
 csv = convert_df(dataset)
 

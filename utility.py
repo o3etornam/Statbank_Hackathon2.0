@@ -3,6 +3,7 @@ import json
 import streamlit as st
 import pandas as pd
 import features
+import plotly.express as px
 from pandasai import SmartDataframe
 from pandasai.llm import OpenAI
 from dotenv import load_dotenv
@@ -60,7 +61,7 @@ def query_builder(warehouse,features,age,query_semi_path, url = url):
         if obj['code'] == "Age":
                 obj['selection']['values'] = age_group
 
-    education = age_group = st.multiselect('Which Education level will you like to filter by', features.education, max_selections= 5,
+    education = st.multiselect('Which Education level will you like to filter by', features.education, max_selections= 5,
                                        default=["Never attended","Primary","Secondary","Tertiary - Bachelor's Degree"], key = '4')
     for obj in query['query']:
         if obj['code'] == "Education":
@@ -72,17 +73,37 @@ def query_builder(warehouse,features,age,query_semi_path, url = url):
 
     return dataset
 
-def data_filter(dataset,w_variable, title):
-    filtered = st.multiselect(f'What {title} will you like to visualize',dataset[w_variable].unique())
-
+def filter_and_plot(dataset,w_variable,count,title):
+    filtered = st.multiselect(f'What {w_variable} will you like to visualize',dataset[w_variable].unique(), 
+                              default=dataset[w_variable].unique())
     filtered_df = dataset[dataset[w_variable].isin(filtered)]
+    location = st.multiselect('Which Region will you like to filter by', filtered_df['Geographic_Area'].unique(),
+                              default=filtered_df['Geographic_Area'].unique()[:5])
+    bar_fig = px.bar(filtered_df[filtered_df['Geographic_Area'].isin(location)],
+                       x='Geographic_Area', y=count, 
+                      color=w_variable, barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+    st.plotly_chart(bar_fig, use_container_width=True) 
 
-    location = st.multiselect('Which Region will you like to filter by', filtered_df['Geographic_Area'].unique())
-    education = age_group = st.multiselect('Which Education level will you like to filter by', filtered_df['Education'].unique()) 
-    gender = st.multiselect('Which gender will you like to filter by', filtered_df['Sex'].unique())
-    age_group = st.multiselect('Which Age group will you like to filter by', filtered_df['Age'].unique())
+    education = st.multiselect('Which Education level will you like to visualize', filtered_df['Education'].unique(),
+                                default = filtered_df['Education'].unique())
+    edu_fig = px.bar(filtered_df[filtered_df['Education'].isin(education)],
+                       x=w_variable, y=count, 
+                      color='Education', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+    st.plotly_chart(edu_fig, use_container_width=True) 
 
-    return filtered_df,location, education, gender, age_group 
+    gender = st.multiselect('Which gender will you like to filter by', filtered_df['Sex'].unique(),
+                            default = filtered_df['Sex'].unique())
+    gender_fig = px.bar(filtered_df[filtered_df['Sex'].isin(gender)],
+                       x=w_variable, y=count, 
+                      color='Sex', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+    st.plotly_chart(gender_fig, use_container_width=True) 
+
+    if len(filtered_df['Age'].unique()) > 1:
+        age_group = st.multiselect('Which Age group will you like to filter by', filtered_df['Age'].unique())
+        age_fig = px.bar(filtered_df[filtered_df['Age'].isin(age_group)],
+                       x=w_variable, y=count, 
+                      color='Age', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+        st.plotly_chart(age_fig, use_container_width=True)
 
 llm = OpenAI(api_token=api_key)
 
