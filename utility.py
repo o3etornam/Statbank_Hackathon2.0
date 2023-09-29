@@ -4,16 +4,10 @@ import streamlit as st
 import pandas as pd
 import features
 import plotly.express as px
-from pandasai import SmartDataframe
-from pandasai.llm import OpenAI
-from dotenv import load_dotenv
-import os
 
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
 
-load_dotenv()
-api_key = st.secrets["OPENAI_API_KEY"]
 
 @st.cache_data
 def api_reader(url, query):
@@ -35,12 +29,13 @@ def load_query(path, root = 'queries/'):
     
     return query
 
-def query_builder(warehouse,features,age,query_semi_path, url = url):
+def query_builder(warehouse,features,query_semi_path, url = url):
     selected = st.selectbox('Select the data you want to visualize',warehouse.keys(), key='1')
     level = st.selectbox('What level of visualization do want?', ['National','Regional','Disctrict'], key = '2')
 
     url = url + warehouse[selected]['extension']
     query = load_query(path = query_semi_path + warehouse[selected]['query_path'])
+    age = warehouse[selected]['age']
 
     if level == 'National':
         for obj in query['query']:
@@ -66,7 +61,6 @@ def query_builder(warehouse,features,age,query_semi_path, url = url):
     for obj in query['query']:
         if obj['code'] == "Education":
             obj['selection']['values'] = education
-
 
     data, columns = api_reader(url= url,query=query)
     dataset = pd.DataFrame(data,columns=columns)
@@ -105,10 +99,4 @@ def filter_and_plot(dataset,w_variable,count,title):
                       color='Age', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
         st.plotly_chart(age_fig, use_container_width=True)
 
-llm = OpenAI(api_token=api_key)
 
-@st.cache_resource
-def query_df(df,prompt,llm = llm):
-    df = SmartDataframe(df, config={"llm": llm})
-    if prompt:
-        return st.write(df.chat(prompt))
