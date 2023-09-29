@@ -10,14 +10,21 @@ def load_lottieurl(url):
         return None
     return r.json()
 
+# Use local CSS
+def local_css(file_name):
+    with open(file_name) as f:
+        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+
+local_css("style/style.css")
+
 data_animation = load_lottieurl("https://lottie.host/354b9800-749a-4f12-885e-03df61fb100c/FRlU5MUfxm.json")
 chat_animation = load_lottieurl("https://lottie.host/7d239120-2e4a-460f-916b-e7d83012e53a/eyOh5ACb5R.json")
 
-# st.title('Welcome to VisualChat')
-st.markdown("<h1 style='text-align: center;'>Welcome to VisualChat</h1>", unsafe_allow_html=True)
-st.write("---")
-st.markdown('')
-st.markdown("<h3 style=''>A platform where one can perform visual analysis of data from PHC Statsbank 2021 and chat with the bot to get insights.</h3>", unsafe_allow_html=True)
+with st.container():
+    st.markdown("<h1 style='text-align: center;'>Welcome to VisualChat</h1>", unsafe_allow_html=True)
+    st.write("---")
+    st.markdown("<h3 style=''>A platform where one can perform visual analysis of data from PHC Statsbank 2021 and chat with the bot to get insights.</h3>", unsafe_allow_html=True)
 
 
 st.markdown("<h2 style='text-align: center;'>What we offer</h2>", unsafe_allow_html=True)
