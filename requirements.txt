@@ -4,3 +4,4 @@ plotly
 pandasai
 openai
 bs4
+langchain
