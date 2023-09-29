@@ -5,3 +5,4 @@ pandasai.log
 cache
 exports
 .vscode/
+.devcontainer
