@@ -48,6 +48,8 @@ for cat in merge_list:
 
             data, columns = api_reader(url= url,query=query)
             dataset = pd.DataFrame(data,columns=columns)
+            w_variable = dataset.columns[0]
+            dataset = dataset.set_index([w_variable,'Geogaphic_Area','Sex','Eduaction','Age'])
             datasets[key] = dataset
 
             url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
