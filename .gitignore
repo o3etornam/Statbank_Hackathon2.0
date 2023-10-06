@@ -1,6 +1,6 @@
 .gitignore
 __pycache__
-.streamlit
+.streamlit/secrets.toml
 pandasai.log
 cache
 exports
