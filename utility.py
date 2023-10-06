@@ -4,6 +4,10 @@ import streamlit as st
 import pandas as pd
 import features
 import plotly.express as px
+from pandasai import SmartDataframe
+from pandasai.llm import OpenAI
+
+
 
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
@@ -50,24 +54,27 @@ def query_builder(warehouse,features,query_semi_path, url = url):
             if obj['code'] == "Geographic_Area":
                 obj['selection']['values'] = features.districts
     
-    age_group = st.multiselect('Which Age group will you like to filter by', age, max_selections= 5,
-                           default=[age[0]], key = '3')
+    age_group = st.multiselect('Which Age group will you like to filter by', age, max_selections= 5)
     for obj in query['query']:
         if obj['code'] == "Age":
                 obj['selection']['values'] = age_group
 
-    education = st.multiselect('Which Education level will you like to filter by', features.education, max_selections= 5,
-                                       default=["Never attended","Primary","Secondary","Tertiary - Bachelor's Degree"], key = '4')
+    education = st.multiselect('Which education level will you like to filter by', features.education, max_selections= 5,key = '4')
     for obj in query['query']:
         if obj['code'] == "Education":
             obj['selection']['values'] = education
 
+    sex = st.multiselect('Which gender will you like to filter by', ['Male','Female'])
+    for obj in query['query']:
+        if obj['code'] == "Sex":
+            obj['selection']['values'] = sex
+
     data, columns = api_reader(url= url,query=query)
     dataset = pd.DataFrame(data,columns=columns)
 
-    return dataset
+    return dataset,age_group,education,sex
 
-def filter_and_plot(dataset,w_variable,count,title):
+def filter_and_plot(dataset,w_variable,count,age_grp,edu,sex):
     filtered = st.multiselect(f'What {w_variable} will you like to visualize',dataset[w_variable].unique(), 
                               default=dataset[w_variable].unique())
     filtered_df = dataset[dataset[w_variable].isin(filtered)]
@@ -78,25 +85,83 @@ def filter_and_plot(dataset,w_variable,count,title):
                       color=w_variable, barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
     st.plotly_chart(bar_fig, use_container_width=True) 
 
-    education = st.multiselect('Which Education level will you like to visualize', filtered_df['Education'].unique(),
-                                default = filtered_df['Education'].unique())
-    edu_fig = px.bar(filtered_df[filtered_df['Education'].isin(education)],
-                       x=w_variable, y=count, 
-                      color='Education', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-    st.plotly_chart(edu_fig, use_container_width=True) 
+    if edu:
+        education = st.multiselect('Which Education level will you like to visualize', filtered_df['Education'].unique(),
+                                    default = filtered_df['Education'].unique())
+        edu_fig = px.bar(filtered_df[filtered_df['Education'].isin(education)],
+                        x=w_variable, y=count, 
+                        color='Education', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+        st.plotly_chart(edu_fig, use_container_width=True) 
 
-    gender = st.multiselect('Which gender will you like to filter by', filtered_df['Sex'].unique(),
-                            default = filtered_df['Sex'].unique())
-    gender_fig = px.bar(filtered_df[filtered_df['Sex'].isin(gender)],
-                       x=w_variable, y=count, 
-                      color='Sex', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-    st.plotly_chart(gender_fig, use_container_width=True) 
+    if sex:
+        gender = st.multiselect('Which gender will you like to filter by', filtered_df['Sex'].unique(),
+                                default = filtered_df['Sex'].unique())
+        gender_fig = px.bar(filtered_df[filtered_df['Sex'].isin(gender)],
+                        x=w_variable, y=count, 
+                        color='Sex', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+        st.plotly_chart(gender_fig, use_container_width=True) 
 
-    if len(filtered_df['Age'].unique()) > 1:
+    if age_grp:
         age_group = st.multiselect('Which Age group will you like to filter by', filtered_df['Age'].unique())
         age_fig = px.bar(filtered_df[filtered_df['Age'].isin(age_group)],
-                       x=w_variable, y=count, 
-                      color='Age', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+                    x=w_variable, y=count, 
+                    color='Age', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
         st.plotly_chart(age_fig, use_container_width=True)
 
 
+api_key = st.secrets["OPENAI_API_KEY"]
+llm = OpenAI(api_token=api_key)
+
+def clear_chat_history():
+    st.session_state.messages = [{"role": "assistant", "content": "What will you like to know?"}]
+    st.sidebar.button('Clear Chat History', on_click=clear_chat_history)
+
+def ananse(df):
+    df = SmartDataframe(df, config={"llm": llm})
+
+    if "messages" not in st.session_state.keys():
+        st.session_state.messages = [{"role": "assistant", "content": "What will you like to know?"}]
+
+    # Display or clear chat messages
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.write(message["content"])
+
+    # User-provided prompt
+    if prompt := st.chat_input(disabled=not api_key):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+    # Generate a new response if last message is not from assistant
+    if st.session_state.messages[-1]["role"] != "assistant":
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking..."):
+                response = df.chat(prompt)
+                placeholder = st.empty()
+                full_response = ''
+                if response:
+                    for item in response:
+                        full_response += item
+                        placeholder.markdown(full_response)
+                        placeholder.markdown(full_response)
+        st.session_state.messages.append({"role": "assistant", "content": full_response})
+
+
+def transform(df,w_variable):
+    count = df.columns[-1]
+    df[count] = df[count].astype(int)
+    
+    group_col = [w_variable,'Geographic_Area']
+    series_list = []
+    for col in ['Sex','Education','Age']:
+        if col in df.columns:
+            group_col.append(col)
+   
+    grp = df.groupby(group_col)
+    for variable in df[w_variable].unique():
+        temp = grp[count].sum().loc[variable]
+        temp.name = f'{w_variable}_{variable}' 
+        series_list.append(temp)
+
+    return series_list
