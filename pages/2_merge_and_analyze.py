@@ -4,7 +4,7 @@ import pandas as pd
 import features
 from warehouse import warehouse, categories
 
-st.title(':red[Ananse]')
+st.title(':red[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
 merge_list = st.multiselect('Which PHC 2021 data will you like to visualize', categories)
 
 datasets = {}
@@ -64,5 +64,7 @@ if transformed_list:
             data = csv,
             file_name = 'merged.csv'
         )
+
+    
 
     ananse(transformed_dfs)

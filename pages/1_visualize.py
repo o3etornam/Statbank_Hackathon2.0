@@ -1,5 +1,5 @@
 import streamlit as st
-from utility import convert_df, filter_and_plot, url, load_query, api_reader, clear_chat_history, ananse, transform
+from utility import convert_df, filter_and_plot, url, load_query, api_reader, ananse, transform
 import pandas as pd
 import plotly.express as px
 from warehouse import warehouse
@@ -79,5 +79,4 @@ filter_and_plot(dataset = dataset,w_variable = w_variable,count = count,
                 sex = sex)
 
 st.subheader('Chat with data powered by OpenAI')
-clear_chat_history()
 ananse(transformed)
