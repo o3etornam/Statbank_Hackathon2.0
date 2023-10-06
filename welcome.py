@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from streamlit_lottie import st_lottie
 
-st.set_page_config(page_title='VisualChat', page_icon=':bar_chart:', layout='wide', initial_sidebar_state='auto')
+st.set_page_config(page_title='VisualChat', page_icon=':bar_chart:', initial_sidebar_state='auto')
 
 def load_lottieurl(url):
     r = requests.get(url)
@@ -34,7 +34,7 @@ st.write("---")
 with st.container():
     left_col, right_col = st.columns(2)
     with left_col:
-        st.header("Data Visualisation at its best")
+        st.header(":blue[Data Visualisation at its best]")
         st.write("##")
         st.write(
             """
