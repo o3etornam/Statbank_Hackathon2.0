@@ -1,5 +1,5 @@
 import streamlit as st
-from utility import query_builder, convert_df, url, load_query, api_reader, transform, ananse
+from utility import convert_df, url, load_query, api_reader, transform, ananse
 import pandas as pd
 import features
 from warehouse import warehouse, categories
@@ -14,10 +14,8 @@ for cat in merge_list:
     for key in warehouse[cat].keys():
         sub_cats.append(key)
 
-selected_sub_cat = st.multiselect('what to talkk', sub_cats)
-level = st.selectbox('What level of visualization do want?', ['Regional','Disctrict'])
-education = st.multiselect('Which Education level will you like to filter by', features.education, max_selections= 5)
-sex = st.multiselect('Which gender level will you like to filter by', ['Male','Female'])
+selected_sub_cat = st.multiselect('Which datasets will you like to merge and analyze', sub_cats)
+level = st.selectbox('What level of anaysis will you be doing?', ['Regional','Disctrict'])
 
 for cat in merge_list:
     for key in selected_sub_cat:
@@ -26,22 +24,14 @@ for cat in merge_list:
             url = url + warehouse[cat][key]['extension']
             query = load_query(path = query_semi_path + warehouse[cat][key]['query_path'])
 
-            if level == 'Regional':
-                for obj in query['query']:
-                    if obj['code'] == "Geographic_Area":
+            for obj in query['query']:
+                if obj['code'] == "Geographic_Area":
+                    if level == 'Regional':
                         obj['selection']['values'] = features.regions
-            else:
-                for obj in query['query']:
-                    if obj['code'] == "Geographic_Area":
+                    else:
                         obj['selection']['values'] = features.districts
 
-            for obj in query['query']:
-                if obj['code'] == "Sex":
-                    obj['selection']['values'] = sex 
-
-            for obj in query['query']:
-                if obj['code'] == "Education": 
-                    obj['selection']['values'] = education
+        
 
             data, columns = api_reader(url= url,query=query)
             dataset = pd.DataFrame(data,columns=columns)
@@ -65,6 +55,12 @@ if transformed_list:
             file_name = 'merged.csv'
         )
 
-    
+    file = st.file_uploader('Upload a dataset to merge with data on statbank')
+    if file:
+        with st.expander('Click to view uploaded dataset'):
+            st.dataframe(file)
 
+
+    
+    st.subheader('Chat with merged datasets powered by OpenAI')
     ananse(transformed_dfs)
