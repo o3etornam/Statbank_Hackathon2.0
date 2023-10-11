@@ -33,51 +33,30 @@ def load_query(path, root = 'queries/'):
     
     return query
 
-def query_builder(warehouse,features,query_semi_path, url = url):
-    selected = st.selectbox('Select the data you want to visualize',warehouse.keys(), key='1')
-    level = st.selectbox('What level of visualization do want?', ['National','Regional','Disctrict'], key = '2')
 
-    url = url + warehouse[selected]['extension']
-    query = load_query(path = query_semi_path + warehouse[selected]['query_path'])
-    age = warehouse[selected]['age']
-
-    if level == 'National':
-        for obj in query['query']:
-            if obj['code'] == "Geographic_Area":
-                obj['selection']['values'] = ['Ghana']
-    elif level == 'Regional':
-        for obj in query['query']:
-            if obj['code'] == "Geographic_Area":
-                obj['selection']['values'] = features.regions
-    else:
-        for obj in query['query']:
-            if obj['code'] == "Geographic_Area":
-                obj['selection']['values'] = features.districts
-    
-    age_group = st.multiselect('Which Age group will you like to filter by', age, max_selections= 5)
+def filter_and_plot(dataset,query):
+    sex,age_grp,local,edu = [],[],[],[]
     for obj in query['query']:
+        if obj['code'] == "Geographic_Area":
+            location =  obj['selection']['values']
+
         if obj['code'] == "Age":
-                obj['selection']['values'] = age_group
-
-    education = st.multiselect('Which education level will you like to filter by', features.education, max_selections= 5,key = '4')
-    for obj in query['query']:
+            age_grp = obj['selection']['values']
         if obj['code'] == "Education":
-            obj['selection']['values'] = education
-
-    sex = st.multiselect('Which gender will you like to filter by', ['Male','Female'])
-    for obj in query['query']:
+            edu = obj['selection']['values']
         if obj['code'] == "Sex":
-            obj['selection']['values'] = sex
+            sex = obj['selection']['values']
+        if obj['code'] == "Locality":
+            local = obj['selection']['values']
 
-    data, columns = api_reader(url= url,query=query)
-    dataset = pd.DataFrame(data,columns=columns)
+    w_variable = query['query'][0]['code']
 
-    return dataset,age_group,education,sex
+    count = dataset.columns[-1]
 
-def filter_and_plot(dataset,w_variable,count,age_grp,edu,sex):
     filtered = st.multiselect(f'What {w_variable} will you like to visualize',dataset[w_variable].unique(), 
                               default=dataset[w_variable].unique())
     filtered_df = dataset[dataset[w_variable].isin(filtered)]
+
     location = st.multiselect('Which Region will you like to filter by', filtered_df['Geographic_Area'].unique(),
                               default=filtered_df['Geographic_Area'].unique()[:5])
     bar_fig = px.bar(filtered_df[filtered_df['Geographic_Area'].isin(location)],
@@ -107,6 +86,14 @@ def filter_and_plot(dataset,w_variable,count,age_grp,edu,sex):
                     x=w_variable, y=count, 
                     color='Age', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
         st.plotly_chart(age_fig, use_container_width=True)
+
+    if local:
+        llc = st.multiselect('Which gender will you like to filter by', filtered_df['Locality'].unique(),
+                                default = filtered_df['Locality'].unique())
+        llc_fig = px.bar(filtered_df[filtered_df['Locality'].isin(llc)],
+                        x=w_variable, y=count, 
+                        color='Locality', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
+        st.plotly_chart(llc_fig, use_container_width=True) 
 
 
 api_key = st.secrets["OPENAI_API_KEY"]
@@ -154,7 +141,7 @@ def transform(df,w_variable):
     
     group_col = [w_variable,'Geographic_Area']
     series_list = []
-    for col in ['Sex','Education','Age']:
+    for col in ['Sex','Education','Age','Locality']:
         if col in df.columns:
             group_col.append(col)
    
