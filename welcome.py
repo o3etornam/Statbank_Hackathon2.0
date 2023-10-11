@@ -29,7 +29,7 @@ import streamlit as st
 
 # st.markdown("<h2 style='text-align: center;'>What we offer</h2>", unsafe_allow_html=True)
 
-# st.write("---")
+# st.write("---")1
 
 # with st.container():
 #     left_col, right_col = st.columns(2)
