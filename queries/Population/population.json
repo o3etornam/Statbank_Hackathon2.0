@@ -1,18 +1,11 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Age",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            
           ]
         }
       },
@@ -21,7 +14,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+            
           ]
         }
       },
@@ -30,7 +23,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -40,15 +33,6 @@
           "filter": "item",
           "values": [
             
-          ]
-        }
-      },
-      {
-        "code": "Age",
-        "selection": {
-          "filter": "item",
-          "values": [
-
           ]
         }
       }

@@ -16,10 +16,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            "Never attended",
-            "Primary",
-            "Secondary",
-            "Tertiary - Bachelor's Degree"
+           
           ]
         }
       },
@@ -28,24 +25,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            "Ghana",
-            "Western",
-            "Central",
-            "Greater Accra",
-            "Volta",
-            "Eastern",
-            "Ashanti",
-            "Western North",
-            "Ahafo",
-            "Bono",
-            "Bono East",
-            "Oti",
-            "Northern",
-            "Savannah",
-            "North East",
-            "Upper East",
-            "Upper West"
-          ]
+                      ]
         }
       },
       {
@@ -53,8 +33,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            "Male",
-            "Female"
+           
           ]
         }
       },

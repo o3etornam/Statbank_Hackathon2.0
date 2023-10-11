@@ -1,18 +1,12 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Literacy_status",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Not literate",
+            "Literate"
           ]
         }
       },
@@ -21,7 +15,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+           
           ]
         }
       },
@@ -30,7 +24,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -39,7 +33,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            
+           
           ]
         }
       },
@@ -48,7 +42,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       }

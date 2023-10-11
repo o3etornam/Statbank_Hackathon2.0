@@ -1,27 +1,26 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Highest_level_of_education",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
-          ]
-        }
-      },
-      {
-        "code": "Education",
-        "selection": {
-          "filter": "item",
-          "values": [
-        
+            "Nursery",
+          "Kindergarten",
+          "Primary",
+          "JSS/JHS",
+          "Middle",
+          "SSS/SHS",
+          "Secondary",
+          "Voc/technical/commercial",
+          "Post middle/secondary Certificate",
+          "Post middle/secondary Diploma",
+          "Tertiary/HND",
+          "Tertiary - Bachelor's Degree",
+          "Tertiary - Post graduate Certificate/Diploma",
+          "Tertiary - Master's Degree",
+          "Tertiary - PhD",
+          "Other (specify)"
           ]
         }
       },
@@ -30,7 +29,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -48,7 +47,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       }

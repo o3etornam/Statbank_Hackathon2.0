@@ -1,18 +1,24 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Language_of_Literacy",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Literate",
+            "Ghanaian_Language",
+            "English",
+            "French",
+            "Arabic",
+            "Russian",
+            "Hausa",
+            "Spanish",
+            "Other",
+            "German",
+            "Hindi",
+            "Chinese",
+            "Swahili",
+            "Japanese"
           ]
         }
       },
@@ -21,7 +27,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+            
           ]
         }
       },
@@ -30,7 +36,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -48,7 +54,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       }

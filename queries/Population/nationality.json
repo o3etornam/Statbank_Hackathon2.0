@@ -1,18 +1,29 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Nationality",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Ghanaian by birth",
+            "Dual Nationality (Ghanaian & other)",
+            "Ghanaian by naturalisation",
+            "Outside Ghana",
+            "ECOWAS Countries",
+            "Cote d'Ivoire",
+            "Nigeria",
+            "Togo",
+            "Liberia",
+            "Burkina Faso",
+            "Sierra Leone",
+            "Gambia",
+            "Other ECOWAS Countries",
+            "Africa, other than ECOWAS",
+            "America (North, South/Caribbean)",
+            "Asia",
+            "Europe",
+            "Oceania",
+            "Stateless"
           ]
         }
       },
@@ -21,7 +32,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+           
           ]
         }
       },
@@ -30,7 +41,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -48,7 +59,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       }

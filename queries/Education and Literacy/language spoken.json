@@ -1,0 +1,75 @@
+{
+    "query": [
+      {
+        "code": "Language_of_Literacy",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Literate in one language",
+            "English only",
+            "Ghanaian language only",
+            "French only",
+            "Arabic only",
+            "Other language",
+            "Literate in two languages",
+            "English and a Ghanaian language",
+            "English and French",
+            "English and Arabic",
+            "Ghanaian language and French",
+            "Ghanaian language and Arabic",
+            "Two Ghanaian languages",
+            "French and Arabic",
+            "Other pairs of languages",
+            "Literate in three languages",
+            "English and two Ghanaian Languages",
+            "English, Ghanaian language and French",
+            "English, Ghanaian language and Arabic",
+            "Ghanaian language, French and Arabic",
+            "Two Ghanaian languages and French",
+            "Two Ghanaian languages and Arabic",
+            "Other three languages",
+            "Literate in more than three languages"
+          ]
+        }
+      },
+      {
+        "code": "Education_level",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Sex",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Age",
+        "selection": {
+          "filter": "item",
+          "values": [
+           
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

@@ -1,0 +1,71 @@
+{
+    "query": [
+      {
+        "code": "Industry",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Agriculture, forestry and fishing",
+            "Manufacturing",
+            "Transportation and storage",
+            "Wholesale and retail trade; repair of motor vehicles and motorcycles",
+            "Other service activities",
+            "Accommodation and food service activities",
+            "Construction",
+            "Arts, entertainment and recreation",
+            "Education",
+            "Electricity, gas, steam and air conditioning supply",
+            "Water supply; sewerage, waste management and remediation activities",
+            "Public administration and defence; compulsory social security",
+            "Activities of households as employers; undifferentiated goods- and services-prod",
+            "Mining and quarrying",
+            "Professional, scientific and technical activities",
+            "Human health and social work activities",
+            "Information and communication",
+            "Real estate activities",
+            "Financial and insurance activities",
+            "Administrative and support service activities",
+            "Activities of extraterritorial organizations and bodies"
+          ]
+        }
+      },
+      {
+        "code": "Education",
+        "selection": {
+          "filter": "item",
+          "values": [
+           
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+    
+          ]
+        }
+      },
+      {
+        "code": "Sex",
+        "selection": {
+          "filter": "item",
+          "values": [
+  
+          ]
+        }
+      },
+      {
+        "code": "Age",
+        "selection": {
+          "filter": "item",
+          "values": [
+           ] 
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

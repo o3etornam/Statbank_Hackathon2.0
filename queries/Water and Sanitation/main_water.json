@@ -1,0 +1,47 @@
+{
+    "query": [
+      {
+        "code": "Domesticwater",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Pipe-borne inside dwelling",
+            "Pipe-borne outside dwelling but on compound",
+            "Pipe-borne outside dwelling but in neighbour's house/compound",
+            "Public tap/Stand pipe",
+            "Borehole/Tube well",
+            "Protected well",
+            "Rain water",
+            "Protected spring",
+            "Tanker supplied/Vendor provided",
+            "Unprotected well",
+            "Unprotected spring",
+            "River/Stream",
+            "Dugout/Pond/Lake/Dam/Canal",
+            "Other"
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

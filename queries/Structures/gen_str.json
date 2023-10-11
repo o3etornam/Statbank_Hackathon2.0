@@ -1,0 +1,47 @@
+{
+    "query": [
+      {
+        "code": "Type_of_structure",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Conventional Structures",
+            "Single Building (Detached)",
+            "One-Storey (Detached)",
+            "Single Building (Semi-Detached)",
+            "Two-storey (Semi-Detached)",
+            "Multiple-storey (Semi-Detached)",
+            "One-storey (Semi-Detached)",
+            "Two Storey (Detached)",
+            "Multiple-storey (Detached)",
+            "Terrace",
+            "Wooden Structures",
+            "Kiosks",
+            "Metal Containers",
+            "Others"
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+           
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

@@ -1,21 +1,23 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Defaecatepoint",
         "selection": {
           "filter": "item",
           "values": [
-            "No",
-            "Yes"
+            "In the bush/open field/gutter",
+            "At the beach",
+            "In a polythene bag",
+            "In a chamber pot"
           ]
         }
       },
       {
-        "code": "Education",
+        "code": "Locality",
         "selection": {
           "filter": "item",
           "values": [
-            
+           
           ]
         }
       },
@@ -24,24 +26,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
-          ]
-        }
-      },
-      {
-        "code": "Sex",
-        "selection": {
-          "filter": "item",
-          "values": [
             
-          ]
-        }
-      },
-      {
-        "code": "Age",
-        "selection": {
-          "filter": "item",
-          "values": [
           ]
         }
       }

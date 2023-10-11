@@ -1,18 +1,19 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Sector",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Public (Government)",
+            "Semi-Public/Parastatal",
+            "Private Formal",
+            "Private Informal",
+            "Local NGO/CSO",
+            "International NGO/CSO",
+            "Religious Organization (local)",
+            "Religious Organization (international)",
+            "International Organization"
           ]
         }
       },
@@ -21,7 +22,6 @@
         "selection": {
           "filter": "item",
           "values": [
-        
           ]
         }
       },
@@ -30,7 +30,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -39,7 +39,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            
+           
           ]
         }
       },
@@ -48,7 +48,6 @@
         "selection": {
           "filter": "item",
           "values": [
-
           ]
         }
       }

@@ -1,18 +1,14 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Severity",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Cannot do at all in at least one domain",
+            "No difficulty",
+            "Some difficulty in at least one domain",
+            "A lot of difficulty in at least one domain"
           ]
         }
       },
@@ -21,7 +17,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+            
           ]
         }
       },
@@ -30,7 +26,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -48,7 +44,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+          
           ]
         }
       }

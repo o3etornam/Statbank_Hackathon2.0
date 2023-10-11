@@ -1,18 +1,14 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Physical",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "No difficulty",
+            "Yes, some difficulty",
+            "Yes, a lot of difficulty",
+            "Cannot do at all"
           ]
         }
       },
@@ -21,7 +17,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+            
           ]
         }
       },
@@ -30,7 +26,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+           
           ]
         }
       },
@@ -48,7 +44,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+           
           ]
         }
       }

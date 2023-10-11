@@ -1,0 +1,43 @@
+{
+    "query": [
+      {
+        "code": "Levelof_completion",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Fully Completed",
+            "Completely roofed but uncompleted",
+            "Partially roofed",
+            "Roofing level (with improvised roof)",
+            "Lintel Level (with improvised roof)",
+            "Roofing level (without roof)",
+            "Lintel Level (without roof)",
+            "Windows Level",
+            "Concrete/Metal Pillar level"
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Rural",
+            "Urban"
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

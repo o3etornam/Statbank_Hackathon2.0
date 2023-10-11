@@ -1,21 +1,15 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Type_of_structure",
         "selection": {
           "filter": "item",
           "values": [
-            "No",
-            "Yes"
-          ]
-        }
-      },
-      {
-        "code": "Education",
-        "selection": {
-          "filter": "item",
-          "values": [
-            
+            "Conventional Structures",
+            "Metal Containers",
+            "Wooden Structures",
+            "Kiosks",
+            "Others"
           ]
         }
       },
@@ -24,24 +18,17 @@
         "selection": {
           "filter": "item",
           "values": [
-
-          ]
-        }
-      },
-      {
-        "code": "Sex",
-        "selection": {
-          "filter": "item",
-          "values": [
             
           ]
         }
       },
       {
-        "code": "Age",
+        "code": "Locality",
         "selection": {
           "filter": "item",
           "values": [
+            "Rural",
+            "Urban"
           ]
         }
       }

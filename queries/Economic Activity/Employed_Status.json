@@ -1,18 +1,19 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Status",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Employee",
+            "Self-employed without employees",
+            "Self-employed with employees",
+            "Casual worker",
+            "Contributing family worker",
+            "Paid apprentice",
+            "Unpaid apprentice",
+            "Domestic worker",
+            "Other"
           ]
         }
       },
@@ -21,7 +22,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+           
           ]
         }
       },
@@ -30,7 +31,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+            
           ]
         }
       },
@@ -48,7 +49,6 @@
         "selection": {
           "filter": "item",
           "values": [
-
           ]
         }
       }

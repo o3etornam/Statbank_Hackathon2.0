@@ -1,21 +1,15 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Levelof_completion_residential",
         "selection": {
           "filter": "item",
           "values": [
-            "No",
-            "Yes"
-          ]
-        }
-      },
-      {
-        "code": "Education",
-        "selection": {
-          "filter": "item",
-          "values": [
-            
+            "Fully Completed",
+            "Completely roofed but uncompleted",
+            "Partially roofed",
+            "Roofing level (with improvised roof)",
+            "Lintel Level (with improvised roof)"
           ]
         }
       },
@@ -24,24 +18,17 @@
         "selection": {
           "filter": "item",
           "values": [
-
-          ]
-        }
-      },
-      {
-        "code": "Sex",
-        "selection": {
-          "filter": "item",
-          "values": [
             
           ]
         }
       },
       {
-        "code": "Age",
+        "code": "Locality",
         "selection": {
           "filter": "item",
           "values": [
+            "Rural",
+            "Urban"
           ]
         }
       }

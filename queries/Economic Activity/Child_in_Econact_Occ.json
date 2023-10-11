@@ -1,18 +1,15 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Occupation",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Service and sales workers",
+            "Skilled agricultural, forestry and fishery workers",
+            "Craft and related trades workers",
+            "Plant and machine operators, and assemblers",
+            "Elementary occupation workers"
           ]
         }
       },
@@ -21,7 +18,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+
           ]
         }
       },
@@ -30,7 +27,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+
           ]
         }
       },
@@ -39,7 +36,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            
+
           ]
         }
       },
@@ -48,7 +45,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       }

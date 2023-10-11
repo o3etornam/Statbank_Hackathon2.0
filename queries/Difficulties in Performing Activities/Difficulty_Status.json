@@ -1,18 +1,12 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Disability",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "With Difficulty",
+            "Without Difficulty"
           ]
         }
       },
@@ -21,7 +15,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+            
           ]
         }
       },
@@ -30,7 +24,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+           
           ]
         }
       },
@@ -48,7 +42,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+        
           ]
         }
       }

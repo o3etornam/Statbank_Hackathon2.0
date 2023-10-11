@@ -1,18 +1,22 @@
 {
     "query": [
       {
-        "code": "Econact",
+        "code": "Industry",
         "selection": {
           "filter": "item",
           "values": [
-            "Employed",
-            "Worked",
-            "Did not work but had a job",
-            "Unemployed",
-            "Available but not seeking work",
-            "First time job seeker",
-            "Worked previously & seeking work",
-            "Outside Labour Force"
+            "Agriculture, forestry and fishing",
+            "Mining and quarrying",
+            "Manufacturing",
+            "Electricity, gas, steam and air conditioning supply",
+            "Water supply; sewerage, waste management and remediation activities",
+            "Construction",
+            "Wholesale and retail trade; repair of motor vehicles and motorcycles",
+            "Transportation and storage",
+            "Accommodation and food service activities",
+            "Arts, entertainment and recreation",
+            "Other service activities",
+            "Activities of households as employers; undifferentiated goods- and services-prod"
           ]
         }
       },
@@ -21,7 +25,7 @@
         "selection": {
           "filter": "item",
           "values": [
-        
+
           ]
         }
       },
@@ -30,7 +34,7 @@
         "selection": {
           "filter": "item",
           "values": [
-          
+
           ]
         }
       },
@@ -39,7 +43,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            
+
           ]
         }
       },
@@ -48,7 +52,6 @@
         "selection": {
           "filter": "item",
           "values": [
-
           ]
         }
       }
