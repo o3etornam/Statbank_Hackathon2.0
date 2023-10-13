@@ -7,3 +7,5 @@ bs4
 langchain
 tabulate
 streamlit_lottie
+streamlit_pandas_profiling
+pandas_profiling
