@@ -3,6 +3,8 @@ from utility import convert_df, url, load_query, api_reader, transform, ananse
 import pandas as pd
 import features
 from warehouse import warehouse, categories
+from pandas_profiling import ProfileReport
+from streamlit_pandas_profiling import st_profile_report
 
 st.title(':red[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
 merge_list = st.multiselect('Which PHC 2021 data will you like to visualize', categories)
@@ -36,9 +38,13 @@ for cat in merge_list:
             data, columns = api_reader(url= url,query=query)
             dataset = pd.DataFrame(data,columns=columns)
             w_variable = dataset.columns[0]
+            count = dataset.columns[-1]
+            dataset[count] = dataset[count].astype(float)
             datasets[key] = dataset
 
+           
             transformed_list += (transform(dataset,w_variable = w_variable))
+            
 
             url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
 
@@ -59,6 +65,11 @@ if transformed_list:
     if file:
         with st.expander('Click to view uploaded dataset'):
             st.dataframe(file)
+
+    with st.expander('Click to view a profile report on merged datasets'):
+        pr = ProfileReport(transformed_dfs, explorative=True)
+        st.subheader('Profiling report')
+        st_profile_report(pr)
 
 
     

@@ -6,11 +6,17 @@ import features
 import plotly.express as px
 from pandasai import SmartDataframe
 from pandasai.llm import OpenAI
+from geojson_rewind import rewind
 
 
 
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
+
+with open('ghana_regions.json') as json_file:
+        geojson = json.load(json_file)
+
+geo_json = rewind(geojson,rfc7946=False)
 
 
 @st.cache_data
@@ -39,7 +45,6 @@ def filter_and_plot(dataset,query):
     for obj in query['query']:
         if obj['code'] == "Geographic_Area":
             location =  obj['selection']['values']
-
         if obj['code'] == "Age":
             age_grp = obj['selection']['values']
         if obj['code'] == "Education":
@@ -50,12 +55,13 @@ def filter_and_plot(dataset,query):
             local = obj['selection']['values']
 
     w_variable = query['query'][0]['code']
-
     count = dataset.columns[-1]
-
-    filtered = st.multiselect(f'What {w_variable} will you like to visualize',dataset[w_variable].unique(), 
+    if not w_variable in ['Geographic_Area','Sex','Age','Locality','Education']:
+        filtered = st.multiselect(f'What {w_variable} will you like to visualize',dataset[w_variable].unique(), 
                               default=dataset[w_variable].unique())
-    filtered_df = dataset[dataset[w_variable].isin(filtered)]
+        filtered_df = dataset[dataset[w_variable].isin(filtered)]
+    else:
+        filtered_df = dataset
 
     location = st.multiselect('Which Region will you like to filter by', filtered_df['Geographic_Area'].unique(),
                               default=filtered_df['Geographic_Area'].unique()[:5])
@@ -137,18 +143,22 @@ def ananse(df):
 
 def transform(df,w_variable):
     count = df.columns[-1]
-    df[count] = df[count].astype(int)
     
-    group_col = [w_variable,'Geographic_Area']
-    series_list = []
-    for col in ['Sex','Education','Age','Locality']:
-        if col in df.columns:
-            group_col.append(col)
+    if not w_variable in ['Geographic_Area','Sex','Age','Locality','Education']:
+        group_col = [w_variable,'Geographic_Area']
+        series_list = []
+        for col in ['Sex','Education','Age','Locality']:
+            if col in df.columns:
+                group_col.append(col)
    
-    grp = df.groupby(group_col)
-    for variable in df[w_variable].unique():
-        temp = grp[count].sum().loc[variable]
-        temp.name = f'{w_variable}_{variable}' 
-        series_list.append(temp)
+        grp = df.groupby(group_col)
+        for variable in df[w_variable].unique():
+            temp = grp[count].sum().loc[variable]
+            temp.name = f'{w_variable}_{variable}' 
+            series_list.append(temp)
 
-    return series_list
+        return series_list
+    temp = df.set_index('Geographic_Area')[count]
+    return [temp]
+
+
