@@ -67,7 +67,7 @@ if transformed_list:
             st.dataframe(file)
 
     with st.expander('Click to view a profile report on merged datasets'):
-        pr = ProfileReport(transformed_dfs, explorative=True)
+        pr = ProfileReport(transformed_dfs, exploratory=True)
         st.subheader('Profiling report')
         st_profile_report(pr)
 
