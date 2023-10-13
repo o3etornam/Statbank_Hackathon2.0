@@ -3,22 +3,26 @@ from utility import convert_df, url, load_query, api_reader, transform, ananse
 import pandas as pd
 import features
 from warehouse import warehouse, categories
-from pandas_profiling import ProfileReport
+from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 
 st.title(':red[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
-merge_list = st.multiselect('Which PHC 2021 data will you like to visualize', categories)
 
-datasets = {}
-sub_cats = []
-transformed_list = []
-for cat in merge_list:
-    for key in warehouse[cat].keys():
-        sub_cats.append(key)
+merge_list = st.multiselect('Which category of PHC 2021 data will you like to merge from', categories)
+with st.form(key='form2'):
+    st.header('Merge Datasets')
+    
+    datasets = {}
+    sub_cats = []
+    transformed_list = []
+    for cat in merge_list:
+        for key in warehouse[cat].keys():
+            sub_cats.append(key)
 
-selected_sub_cat = st.multiselect('Which datasets will you like to merge and analyze', sub_cats)
-level = st.selectbox('What level of anaysis will you be doing?', ['Regional','Disctrict'])
+    selected_sub_cat = st.multiselect('Which datasets will you like to merge and analyze', sub_cats)
+    level = st.selectbox('What level of anaysis will you be doing?', ['Regional','Disctrict'])
 
+    submit_button  = st.form_submit_button('Merge Datasets')
 for cat in merge_list:
     for key in selected_sub_cat:
         if key in warehouse[cat].keys():
@@ -67,9 +71,11 @@ if transformed_list:
             st.dataframe(file)
 
     with st.expander('Click to view a profile report on merged datasets'):
-        pr = ProfileReport(transformed_dfs, exploratory=True)
-        st.subheader('Profiling report')
-        st_profile_report(pr)
+        selected_cols = st.multiselect('Select the columns you will like to ptofile',transformed_dfs.columns)
+        if selected_cols:
+            pr = ProfileReport(transformed_dfs[selected_cols], title = 'Profiling Report')
+            st.subheader('Profiling report')
+            st_profile_report(pr)
 
 
     
