@@ -10,3 +10,4 @@ streamlit_lottie
 streamlit_pandas_profiling
 ydata_profiling
 geojson_rewind
+openpyxl

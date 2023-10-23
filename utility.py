@@ -27,9 +27,11 @@ def api_reader(url, query):
     data = [item['key'] + item['values'] for item in response_json['data']]
     return data, columns
 
-@st.cache_data
+
 def convert_df(df):
-    return df.to_csv()
+    file_formats = {'csv':df.to_csv}
+    selected_file_format = st.radio('What format will you like to save the dataset as',file_formats.keys())
+    return file_formats[selected_file_format](), selected_file_format
 
 @st.cache_data
 def load_query(path, root = 'queries/'):
@@ -37,69 +39,7 @@ def load_query(path, root = 'queries/'):
     with open(full_path) as json_file:
         query = json.load(json_file)
     
-    return query
-
-
-def filter_and_plot(dataset,query):
-    sex,age_grp,local,edu = [],[],[],[]
-    for obj in query['query']:
-        if obj['code'] == "Geographic_Area":
-            location =  obj['selection']['values']
-        if obj['code'] == "Age":
-            age_grp = obj['selection']['values']
-        if obj['code'] == "Education":
-            edu = obj['selection']['values']
-        if obj['code'] == "Sex":
-            sex = obj['selection']['values']
-        if obj['code'] == "Locality":
-            local = obj['selection']['values']
-
-    w_variable = query['query'][0]['code']
-    count = dataset.columns[-1]
-    if not w_variable in ['Geographic_Area','Sex','Age','Locality','Education']:
-        filtered = st.multiselect(f'What {w_variable} will you like to visualize',dataset[w_variable].unique(), 
-                              default=dataset[w_variable].unique())
-        filtered_df = dataset[dataset[w_variable].isin(filtered)]
-    else:
-        filtered_df = dataset
-
-    location = st.multiselect('Which Region will you like to filter by', filtered_df['Geographic_Area'].unique(),
-                              default=filtered_df['Geographic_Area'].unique()[:5])
-    bar_fig = px.bar(filtered_df[filtered_df['Geographic_Area'].isin(location)],
-                       x='Geographic_Area', y=count, 
-                      color=w_variable, barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-    st.plotly_chart(bar_fig, use_container_width=True) 
-
-    if edu:
-        education = st.multiselect('Which Education level will you like to visualize', filtered_df['Education'].unique(),
-                                    default = filtered_df['Education'].unique())
-        edu_fig = px.bar(filtered_df[filtered_df['Education'].isin(education)],
-                        x=w_variable, y=count, 
-                        color='Education', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-        st.plotly_chart(edu_fig, use_container_width=True) 
-
-    if sex:
-        gender = st.multiselect('Which gender will you like to filter by', filtered_df['Sex'].unique(),
-                                default = filtered_df['Sex'].unique())
-        gender_fig = px.bar(filtered_df[filtered_df['Sex'].isin(gender)],
-                        x=w_variable, y=count, 
-                        color='Sex', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-        st.plotly_chart(gender_fig, use_container_width=True) 
-
-    if age_grp:
-        age_group = st.multiselect('Which Age group will you like to filter by', filtered_df['Age'].unique())
-        age_fig = px.bar(filtered_df[filtered_df['Age'].isin(age_group)],
-                    x=w_variable, y=count, 
-                    color='Age', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-        st.plotly_chart(age_fig, use_container_width=True)
-
-    if local:
-        llc = st.multiselect('Which gender will you like to filter by', filtered_df['Locality'].unique(),
-                                default = filtered_df['Locality'].unique())
-        llc_fig = px.bar(filtered_df[filtered_df['Locality'].isin(llc)],
-                        x=w_variable, y=count, 
-                        color='Locality', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
-        st.plotly_chart(llc_fig, use_container_width=True) 
+    return query 
 
 
 api_key = st.secrets["OPENAI_API_KEY"]
@@ -141,7 +81,7 @@ def ananse(df):
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
-def transform(df,w_variable):
+def transform(df,w_variable,multiple = False):
     count = df.columns[-1]
     
     if not w_variable in ['Geographic_Area','Sex','Age','Locality','Education']:
@@ -154,7 +94,10 @@ def transform(df,w_variable):
         grp = df.groupby(group_col)
         for variable in df[w_variable].unique():
             temp = grp[count].sum().loc[variable]
-            temp.name = f'{w_variable}_{variable}' 
+            if multiple:
+                temp.name = f'{w_variable}_{variable}' 
+            else:
+                temp.name = variable
             series_list.append(temp)
 
         return series_list
@@ -162,3 +105,28 @@ def transform(df,w_variable):
     return [temp]
 
 
+@st.cache_data
+def extract_pop_data(data_query):
+    merge_key = []
+    pop_url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/Population/population_table.px'
+    pop_query = load_query('Population/population.json')
+    for query_obj,pop_obj in zip(data_query['query'], pop_query['query']):
+        if pop_obj['code'] == "Geographic_Area":
+                pop_obj['selection']['values'] =  query_obj['selection']['values']
+                if pop_obj['selection']['values']:
+                        merge_key.append('Geographic_Area')
+        if pop_obj['code'] == "Education":
+                pop_obj['selection']['values'] = query_obj['selection']['values']
+                if pop_obj['selection']['values']:
+                        merge_key.append('Eudcation')
+        if pop_obj['code'] == "Sex":
+                pop_obj['selection']['values'] = query_obj['selection']['values']
+                if pop_obj['selection']['values']:
+                        merge_key.append('Sex')
+        if pop_obj['code'] == "Locality":
+                pop_obj['selection']['values'] = query_obj['selection']['values']
+                if pop_obj['selection']['values']:
+                        merge_key.append('Locality')
+
+    pop_data, pop_columns = api_reader(url= pop_url,query=pop_query)
+    return pd.DataFrame(pop_data,columns=pop_columns), merge_key

@@ -23,6 +23,8 @@ with st.form(key='form2'):
     level = st.selectbox('What level of anaysis will you be doing?', ['Regional','Disctrict'])
 
     submit_button  = st.form_submit_button('Merge Datasets')
+if submit_button:
+    submit_button = False
 for cat in merge_list:
     for key in selected_sub_cat:
         if key in warehouse[cat].keys():
@@ -47,7 +49,7 @@ for cat in merge_list:
             datasets[key] = dataset
 
            
-            transformed_list += (transform(dataset,w_variable = w_variable))
+            transformed_list += (transform(dataset,w_variable = w_variable,multiple=True))
             
 
             url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
@@ -57,18 +59,22 @@ if transformed_list:
 
     with st.expander('Click to view (merged) dataset'):
         st.dataframe(transformed_dfs)
-        st.subheader('Download Dataset as CSV')
-        csv = convert_df(transformed_dfs)
+        file, file_format = convert_df(transformed_dfs)
+        st.subheader(f'Download Dataset as {file_format}')
         st.download_button(
-            'Download data as CSV',
-            data = csv,
-            file_name = 'merged.csv'
+            f'Download data as {file_format}',
+            data = file,
+            file_name = f'merged.{file_format}'
         )
 
     file = st.file_uploader('Upload a dataset to merge with data on statbank')
     if file:
+        uploaded_df = pd.read_csv(file)
         with st.expander('Click to view uploaded dataset'):
-            st.dataframe(file)
+            st.dataframe(uploaded_df)
+
+        right_on = st.selectbox('Which column will you like to merge on',uploaded_df.columns)
+        merged_df = pd.merge(transformed_dfs,uploaded_df,left_on='Geographic_Area', right_on=right_on)
 
     with st.expander('Click to view a profile report on merged datasets'):
         selected_cols = st.multiselect('Select the columns you will like to ptofile',transformed_dfs.columns)
