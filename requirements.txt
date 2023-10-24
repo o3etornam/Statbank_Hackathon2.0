@@ -11,3 +11,4 @@ streamlit_pandas_profiling
 ydata_profiling
 geojson_rewind
 openpyxl
+geopandas

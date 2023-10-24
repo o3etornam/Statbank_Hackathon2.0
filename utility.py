@@ -7,11 +7,14 @@ import plotly.express as px
 from pandasai import SmartDataframe
 from pandasai.llm import OpenAI
 from geojson_rewind import rewind
+import geopandas as gpd
 
 
 
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
+
+
 
 with open('ghana_regions.json') as json_file:
         geojson = json.load(json_file)
@@ -81,11 +84,11 @@ def ananse(df):
         st.session_state.messages.append({"role": "assistant", "content": full_response})
 
 
-def transform(df,w_variable,multiple = False):
+def transform(df,w_variable,level,multiple = False):
     count = df.columns[-1]
     
-    if not w_variable in ['Geographic_Area','Sex','Age','Locality','Education']:
-        group_col = [w_variable,'Geographic_Area']
+    if not w_variable in [level,'Sex','Age','Locality','Education']:
+        group_col = [w_variable,level]
         series_list = []
         for col in ['Sex','Education','Age','Locality']:
             if col in df.columns:
@@ -101,32 +104,21 @@ def transform(df,w_variable,multiple = False):
             series_list.append(temp)
 
         return series_list
-    temp = df.set_index('Geographic_Area')[count]
+    temp = df.set_index(level)[count]
     return [temp]
 
 
 @st.cache_data
-def extract_pop_data(data_query):
+def extract_pop_data(data_query, level):
     merge_key = []
     pop_url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/Population/population_table.px'
     pop_query = load_query('Population/population.json')
     for query_obj,pop_obj in zip(data_query['query'], pop_query['query']):
         if pop_obj['code'] == "Geographic_Area":
-                pop_obj['selection']['values'] =  query_obj['selection']['values']
-                if pop_obj['selection']['values']:
-                        merge_key.append('Geographic_Area')
-        if pop_obj['code'] == "Education":
                 pop_obj['selection']['values'] = query_obj['selection']['values']
-                if pop_obj['selection']['values']:
-                        merge_key.append('Eudcation')
-        if pop_obj['code'] == "Sex":
-                pop_obj['selection']['values'] = query_obj['selection']['values']
-                if pop_obj['selection']['values']:
-                        merge_key.append('Sex')
-        if pop_obj['code'] == "Locality":
-                pop_obj['selection']['values'] = query_obj['selection']['values']
-                if pop_obj['selection']['values']:
-                        merge_key.append('Locality')
+                merge_key.append(level)
+    st.write(pop_url)
+    st.write(pop_query)
 
     pop_data, pop_columns = api_reader(url= pop_url,query=pop_query)
     return pd.DataFrame(pop_data,columns=pop_columns), merge_key

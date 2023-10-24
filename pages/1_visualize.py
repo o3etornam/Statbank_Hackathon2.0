@@ -1,24 +1,28 @@
 import streamlit as st
-from utility import convert_df, url, load_query, api_reader, ananse, transform, extract_pop_data
+from utility import convert_df, url, load_query, api_reader, ananse, transform, extract_pop_data, geo_json
 import pandas as pd
 import plotly.express as px
 from warehouse import warehouse
 import features
+import leafmap
 
 st.title(':red[Visualize any Data Across Various Categories of PHC 2021 Data]')
-selected_cat = st.selectbox('Which PHC 2021 data will you like to visualize', warehouse)
+
+selected_cat = st.selectbox('Which PHC 2021 data will you like to visualize', warehouse.keys())
+st.session_state['selected_cat'] = selected_cat
 with st.form(key='form1'):
     query_semi_path = f'{selected_cat}/'
 
     st.header('Build API Query')
 
-    category = warehouse[selected_cat]
+    category = warehouse[st.session_state['selected_cat']]
 
     selected = st.selectbox('Select the data you want to visualize (*required)',category.keys(), key='1')
-    level = st.selectbox('What level of visualization do want? ', ['National','Regional','Disctrict'], key = '2')
+    st.session_state['selected'] = selected
+    level = st.selectbox('What level of visualization do want? ', ['District','Region','Country'], key = '2')
 
-    url += f"{selected_cat}/{category[selected]['extension']}"
-    query = load_query(path = query_semi_path + category[selected]['query_path'])
+    url += f"{st.session_state['selected_cat']}/{category[st.session_state['selected']]['extension']}"
+    query = load_query(path = query_semi_path + category[st.session_state['selected']]['query_path'])
 
     if 'age' in category[selected].keys():
         age = category[selected]['age']
@@ -26,9 +30,9 @@ with st.form(key='form1'):
 
     for obj in query['query']:
         if obj['code'] == "Geographic_Area":
-            if level == 'National':
+            if level == 'Country':
                 obj['selection']['values'] = ['Ghana']
-            elif level == 'Regional':
+            elif level == 'Region':
                 obj['selection']['values'] = features.regions
             else:
                 obj['selection']['values'] = features.districts
@@ -54,23 +58,27 @@ data, columns = api_reader(url= url,query=query)
 dataset = pd.DataFrame(data,columns=columns)
 w_variable = dataset.columns[0]
 count = dataset.columns[-1]
+dataset = dataset.rename(columns = {'Geographic_Area':level})
 
 dataset[count] = dataset[count].astype(float)
 
-adj = True
-if selected in ['Unemployment Rate','Population by Geographic Area']:
-    adj = False
-if adj:
-    pop_dataset, merge_on = extract_pop_data(query)
-    pop_dataset['Population'] = pop_dataset['Population'].astype(float)
-    adj_df = pd.merge(dataset,pop_dataset, on= merge_on)
-    adj_df['Adj. Population'] = (adj_df[count] / adj_df['Population']) * 100
+adj = False
+# if selected in ['Unemployment Rate','Population by Geographic Area']:
+#     adj = False
+# if adj:
+#     st.write(query)
+#     st.write(level)
+#     pop_dataset, merge_on = extract_pop_data(data_query = query , level = level)
+#     pop_dataset['Population'] = pop_dataset['Population'].astype(float)
+#     pop_dataset = pop_dataset.rename(columns ={'Geographic_Area':level})
+#     adj_df = pd.merge(dataset,pop_dataset, on= merge_on)
+#     adj_df['Adj. Population'] = (adj_df[count] / adj_df['Population']) * 100
 
-    with st.expander('debugging on going. click to understand'):
-         st.dataframe(adj_df)
+#     with st.expander('debugging on going. click to understand'):
+#          st.dataframe(adj_df)
 
-if w_variable not in ['Geographic_Area', 'Sex', 'Education','Age', 'Locality']:
-    transformed = pd.concat(transform(dataset,w_variable = w_variable), axis='columns')
+if w_variable not in [level, 'Sex', 'Education','Age', 'Locality']:
+    transformed = pd.concat(transform(dataset,level = level,w_variable = w_variable), axis='columns')
     df = transformed
 else:
     df = dataset
@@ -82,11 +90,23 @@ with st.expander('Click to view a dataset extracted dataframe the statsbank'):
     st.download_button(
         f'Download data as {file_format}',
         data = file,
-        file_name = f'merged.{file_format}'
+        file_name = f'{w_variable}.{file_format}'
     )
 
 st.subheader('Filter Data for Visualization')
+selected_variable = st.selectbox('What will you like to see',df.columns)
+df_name = df.reset_index()
+ghana_fig = px.choropleth(df_name, geojson=geo_json, locations=level, color=selected_variable,
+                           color_continuous_scale="Viridis",
+                           range_color=(00000, 200000),
+                           scope="africa",
+                           featureidkey="properties.District",
+                           labels={'Employed':'Number of employed'}
+                          )
+ghana_fig.update_geos(fitbounds="locations", visible=False)
+#fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
+st.plotly_chart(ghana_fig, use_container_width=False)
 sex,age_grp,local,edu = [],[],[],[]
 for obj in query['query']:
     if obj['code'] == "Geographic_Area":
@@ -100,7 +120,7 @@ for obj in query['query']:
     if obj['code'] == "Locality":
             local = obj['selection']['values']
 
-if w_variable in ['Geographic_Area','Sex','Age','Locality','Education']:
+if w_variable in [level,'Sex','Age','Locality','Education']:
     filtered_df = dataset
     if adj:
         filtered_adj_df = adj_df
@@ -111,15 +131,15 @@ else:
     if adj:
         filtered_adj_df = adj_df[adj_df[w_variable].isin(filtered)] 
 
-location = st.multiselect('Which Region will you like to filter by', filtered_df['Geographic_Area'].unique(),
-                            default=filtered_df['Geographic_Area'].unique()[:5])
-bar_fig = px.bar(filtered_df[filtered_df['Geographic_Area'].isin(location)],
-                    x='Geographic_Area', y=count, 
+location = st.multiselect('Which Region will you like to filter by', filtered_df[level].unique(),
+                            default=filtered_df[level].unique()[:5])
+bar_fig = px.bar(filtered_df[filtered_df[level].isin(location)],
+                    x=level, y=count, 
                     color=w_variable, barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
 st.plotly_chart(bar_fig, use_container_width=True)
 if adj:
-    adj_bar_fig = px.bar(filtered_adj_df[filtered_adj_df['Geographic_Area'].isin(location)],
-                    x='Geographic_Area', y='Adj. Population', 
+    adj_bar_fig = px.bar(filtered_adj_df[filtered_adj_df[level].isin(location)],
+                    x=level, y='Adj. Population', 
                     color=w_variable, barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
     with st.expander('Click to view the adjusted plot'):
         st.plotly_chart(adj_bar_fig, use_container_width=True)
@@ -181,6 +201,5 @@ if local:
         with st.expander('Click to view the adjusted plot'):
                 st.plotly_chart(adj_llc_fig, use_container_width=True)
 
-
-st.subheader('Chat with data powered by OpenAI')
+st.subheader('Chat with Nyansapo powered by OpenAI')
 ananse(df)

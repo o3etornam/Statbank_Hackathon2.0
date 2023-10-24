@@ -1,0 +1,65 @@
+{
+    "query": [
+      {
+        "code": "Usedphone_financial",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Used mobile phone for financial transaction",
+            "Mobile money only",
+            "Both mobile money and other financial transaction",
+            "Other financial transaction only",
+            "Did not use mobile phone for financial transactions"
+          ]
+        }
+      },
+      {
+        "code": "Education",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Sex",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Age",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

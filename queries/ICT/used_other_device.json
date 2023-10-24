@@ -1,0 +1,62 @@
+{
+    "query": [
+      {
+        "code": "Used_other_devices",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "No",
+            "Yes"
+          ]
+        }
+      },
+      {
+        "code": "Education",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+           
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Sex",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      },
+      {
+        "code": "Age",
+        "selection": {
+          "filter": "item",
+          "values": [
+            
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

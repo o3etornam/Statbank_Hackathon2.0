@@ -20,6 +20,15 @@
         }
       },
       {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+           
+          ]
+        }
+      },
+      {
         "code": "Geographic_Area",
         "selection": {
           "filter": "item",
