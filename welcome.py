@@ -21,7 +21,7 @@ def local_css(file_name):
 data_animation = load_lottieurl("https://lottie.host/354b9800-749a-4f12-885e-03df61fb100c/FRlU5MUfxm.json")
 chat_animation = load_lottieurl("https://lottie.host/7d239120-2e4a-460f-916b-e7d83012e53a/eyOh5ACb5R.json")
 
-st.title("Mligbalamo.")
+st.title(':blue[Mligbalamo.]')
 
 st.subheader("A platform provides an intuitive way to analyze and unlock insights from PHC Statsbank 2021, empowering you with powerful data visualization tools.")
 
@@ -61,3 +61,15 @@ st_lottie(chat_animation, height=400, key="chat_animation")
 
 # st.title(':red[Mligbalamo.]')
 # st.header('WebApp built as an interractive wrapper on the PHC 2021 Data')
+
+
+import leafmap.foliumap as leafmap
+
+style = {'fillOpacity': 0.5}
+m = leafmap.Map(center=[0,0], zoom=5)
+geojson_data = "https://raw.githubusercontent.com/Laurent-Smeets-GSS-Account/geojsons/main/geojsons_files/Drophole.geojson"
+m.add_geojson(geojson_data, layer_name="Countries",
+    style=style,
+    fill_colors=['red', 'yellow', 'green', 'orange'],)
+
+m.to_streamlit(height=700)
