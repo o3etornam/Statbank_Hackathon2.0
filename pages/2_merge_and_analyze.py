@@ -6,7 +6,7 @@ from warehouse import warehouse, categories
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
 
-st.title('[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
+st.header(':blue[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
 
 merge_list = st.multiselect('Which category of PHC 2021 data will you like to merge from', categories)
 with st.form(key='form2'):
