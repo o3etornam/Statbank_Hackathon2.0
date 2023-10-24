@@ -6,7 +6,7 @@ from warehouse import warehouse
 import features
 import leafmap
 
-st.title(':red[Visualize any Data Across Various Categories of PHC 2021 Data]')
+st.header(':blue[Visualize any Data Across Various Categories of PHC 2021 Data]')
 
 selected_cat = st.selectbox('Which PHC 2021 data will you like to visualize', warehouse.keys())
 st.session_state['selected_cat'] = selected_cat
@@ -201,5 +201,5 @@ if local:
         with st.expander('Click to view the adjusted plot'):
                 st.plotly_chart(adj_llc_fig, use_container_width=True)
 
-st.subheader('Chat with Nyansapo powered by OpenAI')
+st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
 ananse(df)

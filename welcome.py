@@ -36,8 +36,7 @@ st.markdown('''
             ''')
 
 st.divider()
-st.markdown("<h2 style=''>What we offer :</h2>", unsafe_allow_html=True)
-
+st.header(':blue[What we offer :]')
 # st.write("---")
 
 
@@ -58,18 +57,3 @@ st.write(
 """)
 st.write("##")
 st_lottie(chat_animation, height=400, key="chat_animation")        
-
-# st.title(':red[Mligbalamo.]')
-# st.header('WebApp built as an interractive wrapper on the PHC 2021 Data')
-
-
-import leafmap.foliumap as leafmap
-
-style = {'fillOpacity': 0.5}
-m = leafmap.Map(center=[0,0], zoom=5)
-geojson_data = "https://raw.githubusercontent.com/Laurent-Smeets-GSS-Account/geojsons/main/geojsons_files/Drophole.geojson"
-m.add_geojson(geojson_data, layer_name="Countries",
-    style=style,
-    fill_colors=['red', 'yellow', 'green', 'orange'],)
-
-m.to_streamlit(height=700)
