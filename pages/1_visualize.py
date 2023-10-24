@@ -97,16 +97,16 @@ st.subheader('Filter Data for Visualization')
 selected_variable = st.selectbox('What will you like to see',df.columns)
 df_name = df.reset_index()
 ghana_fig = px.choropleth(df_name, geojson=geo_json, locations=level, color=selected_variable,
-                           color_continuous_scale="Viridis",
-                           range_color=(00000, 200000),
+                           color_continuous_scale="Blues",
+                        #    colorscale = 'Reds',
                            scope="africa",
                            featureidkey="properties.District",
                            labels={'Employed':'Number of employed'}
                           )
 ghana_fig.update_geos(fitbounds="locations", visible=False)
-#fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+ghana_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
 
-st.plotly_chart(ghana_fig, use_container_width=False)
+st.plotly_chart(ghana_fig, use_container_width=True)
 sex,age_grp,local,edu = [],[],[],[]
 for obj in query['query']:
     if obj['code'] == "Geographic_Area":

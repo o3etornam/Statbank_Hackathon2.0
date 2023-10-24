@@ -8,6 +8,7 @@ from pandasai import SmartDataframe
 from pandasai.llm import OpenAI
 from geojson_rewind import rewind
 import geopandas as gpd
+from urllib.request import urlopen
 
 
 
@@ -16,7 +17,7 @@ url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
 
 
 
-with open('ghana_regions.json') as json_file:
+with urlopen('https://raw.githubusercontent.com/Laurent-Smeets-GSS-Account/geojsons/main/geojsons_files/Drophole.geojson') as json_file:
         geojson = json.load(json_file)
 
 geo_json = rewind(geojson,rfc7946=False)
