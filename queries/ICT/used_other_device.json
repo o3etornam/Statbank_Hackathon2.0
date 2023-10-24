@@ -1,7 +1,7 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Used_other_devices",
         "selection": {
           "filter": "item",
           "values": [
@@ -33,7 +33,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       },
@@ -51,6 +51,7 @@
         "selection": {
           "filter": "item",
           "values": [
+            
           ]
         }
       }

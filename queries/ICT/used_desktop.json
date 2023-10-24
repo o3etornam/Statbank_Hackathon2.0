@@ -1,7 +1,7 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Used_desktop_computer",
         "selection": {
           "filter": "item",
           "values": [
@@ -24,7 +24,7 @@
         "selection": {
           "filter": "item",
           "values": [
-           
+            
           ]
         }
       },
@@ -33,7 +33,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       },
@@ -42,7 +42,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            
+           
           ]
         }
       },
@@ -51,6 +51,7 @@
         "selection": {
           "filter": "item",
           "values": [
+            
           ]
         }
       }

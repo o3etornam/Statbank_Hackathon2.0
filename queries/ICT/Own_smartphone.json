@@ -1,12 +1,12 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Own_smartphone",
         "selection": {
           "filter": "item",
           "values": [
-            "No",
-            "Yes"
+            "Yes",
+            "No"
           ]
         }
       },
@@ -33,7 +33,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       },
@@ -51,6 +51,7 @@
         "selection": {
           "filter": "item",
           "values": [
+            
           ]
         }
       }
@@ -58,4 +59,4 @@
     "response": {
       "format": "json"
     }
-  }
+}

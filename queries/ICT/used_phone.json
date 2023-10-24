@@ -1,12 +1,12 @@
 {
     "query": [
       {
-        "code": "Own_laptop",
+        "code": "Used_phone",
         "selection": {
           "filter": "item",
           "values": [
-            "No",
-            "Yes"
+            "Yes",
+            "No"
           ]
         }
       },
@@ -15,7 +15,7 @@
         "selection": {
           "filter": "item",
           "values": [
-            
+           
           ]
         }
       },
@@ -24,7 +24,7 @@
         "selection": {
           "filter": "item",
           "values": [
-           
+            
           ]
         }
       },
@@ -33,7 +33,7 @@
         "selection": {
           "filter": "item",
           "values": [
-
+            
           ]
         }
       },
@@ -51,6 +51,7 @@
         "selection": {
           "filter": "item",
           "values": [
+            
           ]
         }
       }
