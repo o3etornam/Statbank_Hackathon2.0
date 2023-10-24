@@ -8,9 +8,9 @@ from streamlit_pandas_profiling import st_profile_report
 
 st.header(':blue[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
 
-merge_list = st.multiselect('Which category of PHC 2021 data will you like to merge from', categories)
+merge_list = st.multiselect('Which of the Thematic Areas of PHC 2021 data will you like to merge from', categories)
 with st.form(key='form2'):
-    st.header('Merge Datasets')
+    st.subheader('Merge Datasets')
     
     datasets = {}
     sub_cats = []
@@ -19,7 +19,7 @@ with st.form(key='form2'):
         for key in warehouse[cat].keys():
             sub_cats.append(key)
 
-    selected_sub_cat = st.multiselect('Which datasets will you like to merge and analyze (*required)', sub_cats)
+    selected_sub_cat = st.multiselect('Which of the categories will you like to merge and analyze (*required)', sub_cats)
     level = st.selectbox('What level will you like to merge on?', ['Regional','Disctrict'])
 
     submit_button  = st.form_submit_button('Merge Datasets')
