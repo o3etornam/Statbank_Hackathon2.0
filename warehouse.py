@@ -64,10 +64,12 @@ warehouse = {
                      'Type of Structures':{'extension':'Struc_type_table.px', 'query_path':'gen_str.json'},
            
        },
-       'Housing':{'Completeness of Residential Structures':{'extension':'Levelof_completion_res_table.px', 'query_path':'completeness.json'},
-                     'Completeness of Structures':{'extension':'Levelof_completion_struc_table.px', 'query_path':'completeness(all).json'},
-                     'Type of Residential Structures':{'extension':'res_struc_table.px', 'query_path':'res_str.json'},
-                     'Type of Structures':{'extension':'Struc_type_table.px', 'query_path':'gen_str.json'},
+       'Housing':{'Households by Bathing_Facility':{'extension':'bathing_facility.px', 'query_path':'bathing_facility.json'},
+                     'Households by Fuel':{'extension':'cooking_fuel.px', 'query_path':'cooking_source_fuel.json'},
+                     'Cooking Space Used by Households':{'extension':'cooking_space.px', 'query_path':'cooking_space.json'},
+                     'Households by Light':{'extension':'main_light.px', 'query_path':'source_of_lightning.json'},
+                     'Households Type':{'extension':'typeofresidence_table.px', 'query_path':'type_of_residence.json'},
+                     'Type of dwelling unit':{'extension':'typeofdwelling_table.px', 'query_path':'type_of_dwelling_unit.json'},
            
        },
        'Fertility and Mortality':{'Number of Children Ever Born':{'extension':'fertility_table_1.px', 'query_path':'children_ever_born.json', 'age':features.eco_age},
@@ -77,9 +79,6 @@ warehouse = {
                      'Mean Number of Children Surviving':{'extension':'fertility_table_5.px', 'query_path':'mean_number_surviving.json',  'age':features.eco_age},
            
        },
-       'Mortality':{
-           
-       }
      
 
 }

@@ -1,0 +1,45 @@
+{
+    "query": [
+      {
+        "code": "Fuel",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Wood",
+            "LPG",
+            "Bio Gas",
+            "Electricity",
+            "Kerosene",
+            "Charcoal",
+            "Crop residue",
+            "Saw dust",
+            "Animal waste",
+            "Cooking gel",
+            "Other",
+            "None (No cooking)"
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+    
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+ 
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

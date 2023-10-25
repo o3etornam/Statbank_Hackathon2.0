@@ -1,0 +1,36 @@
+{
+    "query": [
+      {
+        "code": "Restype",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Occupied Dwelling Unit",
+            "Secondary Housing Unit",
+            "Vacant Dwelling unit"
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+  
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

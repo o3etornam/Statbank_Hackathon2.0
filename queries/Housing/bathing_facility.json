@@ -1,0 +1,41 @@
+{
+    "query": [
+      {
+        "code": "Bathing_Facility",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Own bathroom for exclusive use by household",
+            "Shared separate bathroom in same house",
+            "Bathroom in another house",
+            "Open space around house",
+            "Private open cubicle",
+            "Shared open cubicle",
+            "Public bath house",
+            "In/near river, pond, lake, dam, etc."
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+          
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

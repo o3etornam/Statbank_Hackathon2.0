@@ -1,0 +1,45 @@
+{
+    "query": [
+      {
+        "code": "Light",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "non-electric",
+            "Flashlight/Torchlight",
+            "Solar lamp",
+            "None",
+            "Candle",
+            "Gas lamp",
+            "Kerosene lamp",
+            "Other",
+            "electric",
+            "Electricity (private generator)",
+            "Electricity (solar panel/invertor)",
+            "Electricity (mains)",
+            "Electricity (community-based Grid)",
+            "Electricity (wind energy)"
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }
