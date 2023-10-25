@@ -147,7 +147,7 @@ if selected_cat in individual_cat:
         pop_df = pop_df[[f'{level}','Population']].set_index(f'{level}')
         adj_df = pd.concat([df,pop_df], axis = 'columns')
         adj = True
-    
+  
 df_name = df.reset_index()
 ghana_fig = px.choropleth(df_name, geojson=geo_json, locations=level, color=selected_variable,
                            color_continuous_scale="Blues",
@@ -174,5 +174,7 @@ if adj:
         ghana_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
         st.plotly_chart(ghana_fig, use_container_width=True)
 
+
 st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
 ananse(df)
+

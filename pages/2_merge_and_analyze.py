@@ -119,6 +119,7 @@ if transformed_list:
     
 
     n = st.slider('Select the number of clusters you want',2, 10, 2)
+    st.subheader(f':blue[Grouping regions into the {n} clusters]') 
     cluster = AgglomerativeClustering(n_clusters=n)
     profile_df['cluster'] = cluster.fit_predict(cluster_df)
     profile_df['cluster'] = profile_df['cluster'].astype(str)

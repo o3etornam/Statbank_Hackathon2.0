@@ -70,17 +70,26 @@ warehouse = {
                      'Type of Structures':{'extension':'Struc_type_table.px', 'query_path':'gen_str.json'},
            
        },
-       'Fertility and Mortality':{'Completeness of Residential Structures':{'extension':'Levelof_completion_res_table.px', 'query_path':'completeness.json'},
+       'Fertility':{'Completeness of Residential Structures':{'extension':'Levelof_completion_res_table.px', 'query_path':'completeness.json'},
                      'Completeness of Structures':{'extension':'Levelof_completion_struc_table.px', 'query_path':'completeness(all).json'},
                      'Type of Residential Structures':{'extension':'res_struc_table.px', 'query_path':'res_str.json'},
                      'Type of Structures':{'extension':'Struc_type_table.px', 'query_path':'gen_str.json'},
            
+       },
+       'Mortality':{
+           
        }
      
 
-    
-
 }
+
+extras = {'ICT':"Data on ICT was taken from individuals in households and stable institutions.It was restricted to individuals age 6 and above",
+          'Economic Activity':'Data on Economic Activity was taken from individuals in households and in stable instituitions',
+          'Water and Sanitation':'Water and Sanitation data was taken from households in the various geographic areas',
+          'Housing':'Housing data was collected from households in the various geographic areas',
+          'Mortality':'Mortality data was collected from the households in the various geographic areas',
+          'Fertility':'Fertility data was collected from girls 12 and above',
+          }
 
 categories = warehouse.keys()
 individual_cat = ['Economic Activity', 'ICT', 'Difficulties in Performing Activities',
