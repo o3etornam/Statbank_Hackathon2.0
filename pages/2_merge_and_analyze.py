@@ -109,30 +109,34 @@ if transformed_list:
             st_profile_report(pr)
 
     st.subheader(':blue[Cluster Analysis]')
-    scaler = StandardScaler()
-    X_scaled = scaler.fit_transform(profile_df)
-    X_normalized = normalize(X_scaled)
-    cluster_df = pd.DataFrame(X_normalized, columns = profile_df.columns, index=profile_df.index)
-    dendro = create_dendrogram(X_normalized)
-    dendro['layout'].update({'title':'Dendrogram of merged dataset'})
-    st.plotly_chart(dendro)
-    
+    with st.form(key='form3'):
+        cluster_cols = st.multiselect('Select the the columns you would like to use for clustering',profile_df.columns)
+        custer_begin = st.form_submit_button('Begin Cluster')
+    if custer_begin:
+        scaler = StandardScaler()
+        X_scaled = scaler.fit_transform(profile_df[cluster_cols])
+        X_normalized = normalize(X_scaled)
+        cluster_df = pd.DataFrame(X_normalized, columns = profile_df[cluster_cols].columns, index=profile_df.index)
+        dendro = create_dendrogram(X_normalized)
+        dendro['layout'].update({'title':'Dendrogram of merged dataset'})
+        st.plotly_chart(dendro)
+        
 
-    n = st.slider('Select the number of clusters you want',2, 10, 2)
-    st.subheader(f':blue[Grouping regions into the {n} clusters]') 
-    cluster = AgglomerativeClustering(n_clusters=n)
-    profile_df['cluster'] = cluster.fit_predict(cluster_df)
-    profile_df['cluster'] = profile_df['cluster'].astype(str)
-    profile_df_name = profile_df.reset_index()
+        n = st.slider('Select the number of clusters you want',2, 10, 2)
+        st.write('Grouping districts into the selected number of clusters') 
+        cluster = AgglomerativeClustering(n_clusters=n)
+        profile_df['cluster'] = cluster.fit_predict(cluster_df)
+        profile_df['cluster'] = profile_df['cluster'].astype(str)
+        profile_df_name = profile_df.reset_index()
 
 
-    fig = px.choropleth(profile_df_name, geojson=geo_json, color="cluster",
-                        locations=level, featureidkey="properties.District",
-                        projection="mercator", title = 'Cluster Analysis',
-                    )
-    fig.update_geos(fitbounds="locations", visible=False)
-    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
-    st.plotly_chart(fig)
+        fig = px.choropleth(profile_df_name, geojson=geo_json, color="cluster",
+                            locations=level, featureidkey="properties.District",
+                            projection="mercator", title = 'Cluster Analysis',
+                        )
+        fig.update_geos(fitbounds="locations", visible=False)
+        fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+        st.plotly_chart(fig)
 
     st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
     ananse(transformed_dfs)

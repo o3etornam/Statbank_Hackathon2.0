@@ -27,7 +27,7 @@ st.subheader("This platform provides an intuitive way to analyze and unlock insi
 
 st.divider()
 
-st.subheader('Features :')
+st.subheader('Features:')
 st.markdown('''
             * Use interactive plots to visualize PHC 2021 Data
             * Query datasets using natural language
