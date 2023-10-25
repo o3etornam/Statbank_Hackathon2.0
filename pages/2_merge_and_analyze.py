@@ -1,5 +1,5 @@
 import streamlit as st
-from utility import convert_df, url, load_query, api_reader, transform, ananse
+from utility import convert_df, url, load_query, api_reader, transform, ananse, geo_json
 import pandas as pd
 import features
 from warehouse import warehouse, categories, individual_cat, housing_cat
@@ -10,6 +10,7 @@ import matplotlib.pyplot as plt
 from plotly.figure_factory import create_dendrogram
 from sklearn.cluster import AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler, normalize
+import plotly.express as px
 
 
 st.header(':blue[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
@@ -30,7 +31,7 @@ with st.form(key='form2'):
             sub_cats.append(key)
 
     selected_sub_cat = st.multiselect('Which of the categories will you like to merge and analyze (*required)', sub_cats)
-    level = 'Disctrict'
+    level = 'District'
 
     submit_button  = st.form_submit_button('Merge Datasets')
 if submit_button:
@@ -120,7 +121,16 @@ if transformed_list:
     n = st.slider('Select the number of clusters you want',2, 10, 2)
     cluster = AgglomerativeClustering(n_clusters=n)
     profile_df['cluster'] = cluster.fit_predict(cluster_df)
-    st.dataframe(profile_df['cluster'])
+    profile_df['cluster'] = profile_df['cluster'].astype(str)
+    profile_df_name = profile_df.reset_index()
+
+    fig = px.choropleth(profile_df_name, geojson=geo_json, color="cluster",
+                        locations=level, featureidkey="properties.district",
+                        projection="mercator", title = 'Cluster Analysis'
+                    )
+    fig.update_geos(fitbounds="locations", visible=False)
+    fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+    st.plotly_chart(fig)
 
     st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
     ananse(transformed_dfs)
