@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 from streamlit_lottie import st_lottie
 
-st.set_page_config(page_title='Mligbalamo', page_icon=':bar_chart:', initial_sidebar_state='auto')
+st.set_page_config(page_title='Nsem Fie', page_icon=':bar_chart:', initial_sidebar_state='auto')
 
 def load_lottieurl(url):
     r = requests.get(url)
@@ -21,9 +21,9 @@ def local_css(file_name):
 data_animation = load_lottieurl("https://lottie.host/354b9800-749a-4f12-885e-03df61fb100c/FRlU5MUfxm.json")
 chat_animation = load_lottieurl("https://lottie.host/7d239120-2e4a-460f-916b-e7d83012e53a/eyOh5ACb5R.json")
 
-st.title(':blue[Mligbalamo.]')
+st.title(':blue[Nsem Fie.]')
 
-st.subheader("A platform provides an intuitive way to analyze and unlock insights from PHC Statsbank 2021, empowering you with powerful data visualization tools.")
+st.subheader("This platform provides an intuitive way to analyze and unlock insights from PHC Statsbank 2021, empowering you with powerful data visualization tools.")
 
 st.divider()
 
@@ -56,4 +56,4 @@ st.write(
     Nyansapo is your virtual data assistant, ready to answer questions, provide insights, and guide you through the data exploration process.
 """)
 st.write("##")
-st_lottie(chat_animation, height=400, key="chat_animation")        
+st_lottie(chat_animation, height=400, key="chat_animation")    
