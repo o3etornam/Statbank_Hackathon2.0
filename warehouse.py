@@ -70,10 +70,11 @@ warehouse = {
                      'Type of Structures':{'extension':'Struc_type_table.px', 'query_path':'gen_str.json'},
            
        },
-       'Fertility':{'Completeness of Residential Structures':{'extension':'Levelof_completion_res_table.px', 'query_path':'completeness.json'},
-                     'Completeness of Structures':{'extension':'Levelof_completion_struc_table.px', 'query_path':'completeness(all).json'},
-                     'Type of Residential Structures':{'extension':'res_struc_table.px', 'query_path':'res_str.json'},
-                     'Type of Structures':{'extension':'Struc_type_table.px', 'query_path':'gen_str.json'},
+       'Fertility and Mortality':{'Number of Children Ever Born':{'extension':'fertility_table_1.px', 'query_path':'children_ever_born.json', 'age':features.eco_age},
+                     'Number of Children Surviving':{'extension':'fertility_table_2.px', 'query_path':'children_surviving.json',  'age':features.eco_age},
+                     'Mean Age at First Birth':{'extension':'fertility_table_3.px', 'query_path':'mean_age.json',  'age':features.eco_age},
+                     'Mean Number of Children Ever Born':{'extension':'fertility_table_4.px', 'query_path':'mean_number_ever_born.json',  'age':features.eco_age},
+                     'Mean Number of Children Surviving':{'extension':'fertility_table_5.px', 'query_path':'mean_number_surviving.json',  'age':features.eco_age},
            
        },
        'Mortality':{
