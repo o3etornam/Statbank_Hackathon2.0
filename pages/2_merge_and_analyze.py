@@ -2,15 +2,25 @@ import streamlit as st
 from utility import convert_df, url, load_query, api_reader, transform, ananse
 import pandas as pd
 import features
-from warehouse import warehouse, categories
+from warehouse import warehouse, categories, individual_cat, housing_cat
 from ydata_profiling import ProfileReport
 from streamlit_pandas_profiling import st_profile_report
+import numpy as np
+import matplotlib.pyplot as plt
+from plotly.figure_factory import create_dendrogram
+from sklearn.cluster import AgglomerativeClustering
+from sklearn.preprocessing import StandardScaler, normalize
+
 
 st.header(':blue[Merge and Analyze Data Across The Various Categories of PHC 2021 Data]')
-
-merge_list = st.multiselect('Which of the Thematic Areas of PHC 2021 data will you like to merge from', categories)
+allow_merge = st.selectbox('What kind of data collection source will you like to merge on', ['Individuals', 'Households'])
+if allow_merge == 'Individuals':
+    data_source = individual_cat
+else:
+    data_source = housing_cat
+merge_list = st.multiselect('Which of the thematic areas of PHC 2021 data will you like to merge from', data_source)
 with st.form(key='form2'):
-    st.subheader('Merge Datasets')
+    st.subheader(':blue[Merge Datasets]')
     
     datasets = {}
     sub_cats = []
@@ -20,7 +30,7 @@ with st.form(key='form2'):
             sub_cats.append(key)
 
     selected_sub_cat = st.multiselect('Which of the categories will you like to merge and analyze (*required)', sub_cats)
-    level = st.selectbox('What level will you like to merge on?', ['Regional','Disctrict'])
+    level = 'Disctrict'
 
     submit_button  = st.form_submit_button('Merge Datasets')
 if submit_button:
@@ -63,13 +73,13 @@ if transformed_list:
     with st.expander('Click to view (merged) dataset'):
         st.dataframe(transformed_dfs)
         file, file_format = convert_df(transformed_dfs)
-        st.subheader(f'Download Dataset as {file_format}')
+        st.subheader(f':blue[Download Dataset as {file_format}]')
         st.download_button(
             f'Download data as {file_format}',
             data = file,
             file_name = f'merged.{file_format}'
         )
-    st.subheader('Upload a dataset to merge with data on statbank')
+    st.subheader(':blue[Upload a dataset to merge with data on statbank]')
     file = st.file_uploader('')
     if file:
         uploaded_df = pd.read_csv(file)
@@ -85,7 +95,7 @@ if transformed_list:
         merged = True
 
     
-    st.subheader('Profile merged datasets')
+    st.subheader(':blue[Profile merged datasets]')
     with st.expander('Click to view a profile report on merged datasets'):
         if merged:
             profile_df = merged_df
@@ -97,7 +107,20 @@ if transformed_list:
             st.subheader('Profiling report')
             st_profile_report(pr)
 
-
+    st.subheader(':blue[Cluster Analysis]')
+    scaler = StandardScaler()
+    X_scaled = scaler.fit_transform(profile_df)
+    X_normalized = normalize(X_scaled)
+    cluster_df = pd.DataFrame(X_normalized, columns = profile_df.columns, index=profile_df.index)
+    dendro = create_dendrogram(X_normalized)
+    dendro['layout'].update({'title':'Dendrogram of merged dataset'})
+    st.plotly_chart(dendro)
     
-    st.subheader('Chat with Nyansapo powered by OpenAI')
+
+    n = st.slider('Select the number of clusters you want',2, 10, 2)
+    cluster = AgglomerativeClustering(n_clusters=n)
+    profile_df['cluster'] = cluster.fit_predict(cluster_df)
+    st.dataframe(profile_df['cluster'])
+
+    st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
     ananse(transformed_dfs)

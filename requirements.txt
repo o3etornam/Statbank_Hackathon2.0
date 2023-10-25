@@ -12,3 +12,5 @@ ydata_profiling
 geojson_rewind
 openpyxl
 geopandas
+sklearn
+numpy

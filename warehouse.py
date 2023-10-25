@@ -83,3 +83,7 @@ warehouse = {
 }
 
 categories = warehouse.keys()
+individual_cat = ['Economic Activity', 'ICT', 'Difficulties in Performing Activities',
+                  'Education and Literacy','Fertility','Population']
+
+housing_cat = ['Mortalilty','Water and Sanitation', 'Housing']

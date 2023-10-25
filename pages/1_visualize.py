@@ -2,9 +2,9 @@ import streamlit as st
 from utility import convert_df, url, load_query, api_reader, ananse, transform, extract_pop_data, geo_json
 import pandas as pd
 import plotly.express as px
-from warehouse import warehouse
+from warehouse import warehouse, individual_cat
 import features
-import leafmap
+
 
 st.header(':blue[Visualize any Data Across Various Categories of PHC 2021 Data]')
 
@@ -13,7 +13,7 @@ st.session_state['selected_cat'] = selected_cat
 with st.form(key='form1'):
     query_semi_path = f'{selected_cat}/'
 
-    st.header('Build API Query')
+    st.header(':blue[Build API Query]')
 
     category = warehouse[st.session_state['selected_cat']]
 
@@ -63,26 +63,25 @@ dataset = dataset.rename(columns = {'Geographic_Area':level})
 dataset[count] = dataset[count].astype(float)
 
 adj = False
-# if selected in ['Unemployment Rate','Population by Geographic Area']:
-#     adj = False
-# if adj:
-#     st.write(query)
-#     st.write(level)
-#     pop_dataset, merge_on = extract_pop_data(data_query = query , level = level)
-#     pop_dataset['Population'] = pop_dataset['Population'].astype(float)
-#     pop_dataset = pop_dataset.rename(columns ={'Geographic_Area':level})
-#     adj_df = pd.merge(dataset,pop_dataset, on= merge_on)
-#     adj_df['Adj. Population'] = (adj_df[count] / adj_df['Population']) * 100
+# if selected_cat individual_cat: 
+    # if selected in ['Unemployment Rate','Population by Geographic Area']:
+    #     adj = False
+    # if adj:
+    #     pop_dataset, merge_on = extract_pop_data(data_query = query , level = level)
+    #     pop_dataset['Population'] = pop_dataset['Population'].astype(float)
+    #     pop_dataset = pop_dataset.rename(columns ={'Geographic_Area':level})
+    #     adj_df = pd.merge(dataset,pop_dataset, on= merge_on)
+    #     adj_df['Adj. Population'] = (adj_df[count] / adj_df['Population']) * 100
 
-#     with st.expander('debugging on going. click to understand'):
-#          st.dataframe(adj_df)
+    #     with st.expander('debugging on going. click to understand'):
+    #          st.dataframe(adj_df)
 
 if w_variable not in [level, 'Sex', 'Education','Age', 'Locality']:
     transformed = pd.concat(transform(dataset,level = level,w_variable = w_variable), axis='columns')
     df = transformed
 else:
     df = dataset
-st.subheader('Dataset Extracted with API Query')
+st.subheader(':blue[Dataset Extracted with API Query]')
 with st.expander('Click to view a dataset extracted dataframe the statsbank'):
     st.dataframe(df)
     file, file_format = convert_df(df)
@@ -93,20 +92,8 @@ with st.expander('Click to view a dataset extracted dataframe the statsbank'):
         file_name = f'{w_variable}.{file_format}'
     )
 
-st.subheader('Filter Data for Visualization')
-selected_variable = st.selectbox('What will you like to see',df.columns)
-df_name = df.reset_index()
-ghana_fig = px.choropleth(df_name, geojson=geo_json, locations=level, color=selected_variable,
-                           color_continuous_scale="Blues",
-                        #    colorscale = 'Reds',
-                           scope="africa",
-                           featureidkey="properties.District",
-                           labels={'Employed':'Number of employed'}
-                          )
-ghana_fig.update_geos(fitbounds="locations", visible=False)
-ghana_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.subheader(':blue[Filter Data for Visualization]')
 
-st.plotly_chart(ghana_fig, use_container_width=True)
 sex,age_grp,local,edu = [],[],[],[]
 for obj in query['query']:
     if obj['code'] == "Geographic_Area":
@@ -200,6 +187,18 @@ if local:
                         color='Locality', barmode='group', title=f'Grouped Bar Plot showing across regions in Ghana')
         with st.expander('Click to view the adjusted plot'):
                 st.plotly_chart(adj_llc_fig, use_container_width=True)
+
+selected_variable = st.selectbox(f'What {w_variable} variable will you like analyze across {level}s in Ghana',df.columns)
+df_name = df.reset_index()
+ghana_fig = px.choropleth(df_name, geojson=geo_json, locations=level, color=selected_variable,
+                           color_continuous_scale="Blues",
+                           scope="africa",
+                           featureidkey="properties.District",
+                           labels={'Employed':'Number of employed'}
+                          )
+ghana_fig.update_geos(fitbounds="locations", visible=False)
+ghana_fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
+st.plotly_chart(ghana_fig, use_container_width=True)
 
 st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
 ananse(df)

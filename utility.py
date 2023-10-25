@@ -111,13 +111,26 @@ def transform(df,w_variable,level,multiple = False):
 
 @st.cache_data
 def extract_pop_data(data_query, level):
-    merge_key = []
+    merge_key = level
     pop_url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/Population/population_table.px'
-    pop_query = load_query('Population/population.json')
-    for query_obj,pop_obj in zip(data_query['query'], pop_query['query']):
-        if pop_obj['code'] == "Geographic_Area":
-                pop_obj['selection']['values'] = query_obj['selection']['values']
-                merge_key.append(level)
+    #pop_query = load_query('Population/population.json')
+    if level == 'Region':
+        geo_area = features.regions
+    else:
+        geo_area = features.districts
+    pop_query = {
+            "query": [
+      {
+        "code": "Hearing",
+        "selection": {
+          "filter": "item",
+          "values": geo_area
+        }
+      }],
+      "response": {
+      "format": "json"
+    }
+      }
     st.write(pop_url)
     st.write(pop_query)
 
