@@ -124,9 +124,10 @@ if transformed_list:
     profile_df['cluster'] = profile_df['cluster'].astype(str)
     profile_df_name = profile_df.reset_index()
 
+
     fig = px.choropleth(profile_df_name, geojson=geo_json, color="cluster",
-                        locations=level, featureidkey="properties.district",
-                        projection="mercator", title = 'Cluster Analysis'
+                        locations=level, featureidkey="properties.District",
+                        projection="mercator", title = 'Cluster Analysis',
                     )
     fig.update_geos(fitbounds="locations", visible=False)
     fig.update_layout(margin={"r":0,"t":0,"l":0,"b":0})
