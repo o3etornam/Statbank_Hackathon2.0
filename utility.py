@@ -15,12 +15,13 @@ from urllib.request import urlopen
 session = requests.Session()
 url = 'https://statsbank.statsghana.gov.gh:443/api/v1/en/PHC 2021 StatsBank/'
 
-
-
-with urlopen('https://raw.githubusercontent.com/Laurent-Smeets-GSS-Account/geojsons/main/geojsons_files/Drophole.geojson') as json_file:
+@st.cache_data
+def get_geo():
+    with urlopen('https://raw.githubusercontent.com/Laurent-Smeets-GSS-Account/geojsons/main/geojsons_files/Drophole.geojson') as json_file:
         geojson = json.load(json_file)
+    return rewind(geojson,rfc7946=False)
 
-geo_json = rewind(geojson,rfc7946=False)
+geo_json = get_geo()
 
 
 @st.cache_data

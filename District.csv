@@ -1,0 +1,279 @@
+,District,Population
+0,Jomoro Municipal,126576.0
+1,Ellembelle,120893.0
+2,Nzema East Municipal,94621.0
+3,Ahanta West Municipal,153140.0
+4,Effia Kwesimintsim Municipal,173975.0
+5,Sekondi Takoradi Metropolitan Area (STMA),245382.0
+6,STMA-Takoradi,50065.0
+7,STMA-Sekondi,54772.0
+8,STMA-Essikado-Ketan,140545.0
+9,Shama,117224.0
+10,Wassa East,99641.0
+11,Mpohor,52028.0
+12,Tarkwa-Nsuaem Municipal,219109.0
+13,Prestea/Huni Valley Municipal,229301.0
+14,Wassa Amenfi East Municipal,179696.0
+15,Wassa Amenfi Central,117999.0
+16,Wassa Amenfi West Municipal,131000.0
+17,Komenda Edina Eguafo Abirem Municipal,166017.0
+18,Cape Cape Metropolitan Area (CCMA),189925.0
+19,CCMA-Cape Coast South,70286.0
+20,CCMA-Cape Coast North,119639.0
+21,Abura Asebu Kwamankese,124465.0
+22,Mfantsiman Municipal,168905.0
+23,Ekumfi,56741.0
+24,Gomoa West,129512.0
+25,Effutu Municipal,108816.0
+26,Gomoa Central,82592.0
+27,Gomoa East,308697.0
+28,Awutu Senya East Municipal,236527.0
+29,Awutu Senya,161460.0
+30,Agona East,98637.0
+31,Agona West Municipal,136569.0
+32,Asikuma Odoben Brakwa,126993.0
+33,Ajumako Enyan Essiam,120586.0
+34,Assin South,105995.0
+35,Twifo Heman Lower Denkyira,66075.0
+36,Twifo Ati Morkwa,100851.0
+37,Assin Fosu Municipal,88753.0
+38,Assin North,80539.0
+39,Upper Denkyira East Municipal,110141.0
+40,Upper Denkyira West,91025.0
+41,Ga South Municipal,350121.0
+42,Weija Gbawe Municipal,213674.0
+43,Ga Central Municipal,332232.0
+44,Ablekuma North Municipal,159208.0
+45,Ablekuma West Municipal,153490.0
+46,Ablekuma Central Municipal,169145.0
+47,Accra Metropolitan Area (AMA),284124.0
+48,AMA-Ablekuma South,110158.0
+49,AMA-Ashiedu Keteke,88633.0
+50,AMA-Okaikoi South,85333.0
+51,Korle Klottey Municipal,68633.0
+52,Ayawaso Central Municipal,94831.0
+53,Ayawaso East Municipal,53004.0
+54,Ayawaso North Municipal,63386.0
+55,La Dade-Kotopon Municipal,140264.0
+56,Ledzokuku Municipal,217304.0
+57,Krowor Municipal,143012.0
+58,Adentan Municipal,265971.0
+59,Ayawaso West Municipal,75303.0
+60,Okaikoi North Municipal,160446.0
+61,Ga North Municipal,235292.0
+62,Ga West Municipal,314299.0
+63,Ga East Municipal,283379.0
+64,La Nkwantanang Madina Municipal,220757.0
+65,Kpone Katamanso Municipal,412828.0
+66,Ashaiman Municipal,208060.0
+67,Tema West Municipal,196224.0
+68,Tema Metropolitan Area (TMA),177924.0
+69,TMA-Tema Central,66191.0
+70,TMA-Tema East,111733.0
+71,Ningo-Prampram,204673.0
+72,Shai-Osudoku,105610.0
+73,Ada West,76087.0
+74,Ada East,76411.0
+75,South Tongu,113114.0
+76,Anloga,94895.0
+77,Keta Municipal,78862.0
+78,Ketu South Municipal,253122.0
+79,Ketu North Municipal,114993.0
+80,Akatsi North,32755.0
+81,Akatsi South Municipal,92133.0
+82,Central Tongu,83284.0
+83,North Tongu,111410.0
+84,Ho West,83172.0
+85,Adaklu,38649.0
+86,Agortime-Ziope,39553.0
+87,Ho Municipal,180142.0
+88,South Dayi,57518.0
+89,Afadzato South,73146.0
+90,North Dayi,39268.0
+91,Kpando Municipal,58552.0
+92,Hohoe Municipal,114472.0
+93,Birim South,35654.0
+94,Birim Central Municipal,76302.0
+95,Achiase,56348.0
+96,Asene Manso Akroso,77498.0
+97,West Akim Municipal,117681.0
+98,Upper West Akim,95855.0
+99,Ayensuano,94594.0
+100,Nsawam Adoagyiri Municipal,155597.0
+101,Akwapim South Municipal,76922.0
+102,Akwapim North Municipal,105315.0
+103,Okere,51675.0
+104,New Juaben South Municipal,129741.0
+105,New Juaben North Municipal,88716.0
+106,Suhum Municipal,126403.0
+107,Abuakwa North Municipal,76195.0
+108,Abuakwa South Municipal,89051.0
+109,Denkyembuor,77029.0
+110,Akyemansa,91038.0
+111,Kwaebibirem Municipal,121698.0
+112,Birim North,82669.0
+113,Atiwa West,61219.0
+114,Atiwa East,64647.0
+115,Fanteakwa South,54634.0
+116,Yilo Krobo Municipal,122398.0
+117,Lower Manya Krobo Municipal,121849.0
+118,Asuogyaman,101256.0
+119,Upper Manya Krobo,70612.0
+120,Fanteakwa North,56987.0
+121,Kwahu South Municipal,79851.0
+122,Kwahu West Municipal,145429.0
+123,Kwahu East,80233.0
+124,Kwahu Afram Plains South,74002.0
+125,Kwahu Afram Plains North,66555.0
+126,Amansie South,113155.0
+127,Amansie Central,93052.0
+128,Akrofuom,49291.0
+129,Adansi South,85200.0
+130,Adansi Asokwa,71844.0
+131,Obuasi East,92401.0
+132,Obuasi Municipal,104297.0
+133,Adansi North,54155.0
+134,Bekwai Municipal,137967.0
+135,Amansie West,112627.0
+136,Atwima Kwanwoma,234846.0
+137,Bosomtwi,165180.0
+138,Bosome Freho,62259.0
+139,Asante Akim Central Municipal,91673.0
+140,Asante Akim South Municipal,123633.0
+141,Asante Akim North Municipal,85202.0
+142,Sekyere Kumawu,64396.0
+143,Sekyere East,74789.0
+144,Juaben Municipal,63929.0
+145,Ejisu Municipal,180723.0
+146,Oforikrom Municipal,213126.0
+147,Asokwa Municipal,125642.0
+148,Kumasi Metropolitan Area (KMA),443981.0
+149,KMA-Nhyiaeso,114944.0
+150,KMA-Subin,76466.0
+151,KMA-Manhyia South,38138.0
+152,KMA-Manhyia North,91893.0
+153,KMA-Bantama,122540.0
+154,Kwadaso Municipal,154526.0
+155,Suame Municipal,136290.0
+156,Old Tafo Municipal,114368.0
+157,Asokore Mampong Municipal,191402.0
+158,Kwabre East,296814.0
+159,Afigya Kwabre South,234667.0
+160,Atwima Nwabiagya North,155025.0
+161,Atwima Nwabiagya South Municipal,161893.0
+162,Atwima Mponua,155254.0
+163,Ahafo Ano South West,65770.0
+164,Ahafo Ano North Municipal,92742.0
+165,Ahafo Ano South East,63468.0
+166,Offinso North,83440.0
+167,Offinso Municipal,137272.0
+168,Afigya Kwabre North,73330.0
+169,Sekyere South,120076.0
+170,Mampong Municipal,116632.0
+171,Ejura Sekyedumase Municipal,137672.0
+172,Sekyere Central,73228.0
+173,Sekyere Afram Plains,33226.0
+174,Aowin Municipal,133257.0
+175,Sefwi Akontombra,66689.0
+176,Suaman,38268.0
+177,Bodi,65748.0
+178,Sefwi Wiawso Municipal,151220.0
+179,Bibiani Anhwiaso Bekwai Municipal,167971.0
+180,Juaboso,88814.0
+181,Bia West,115881.0
+182,Bia East,53073.0
+183,Asunafo South,91693.0
+184,Asunafo North Municipal,151258.0
+185,Asutifi South,67334.0
+186,Asutifi North,73556.0
+187,Tano North Municipal,93838.0
+188,Tano South Municipal,86989.0
+189,Dormaa West,47913.0
+190,Dormaa Central Municipal,112702.0
+191,Dormaa East,67899.0
+192,Sunyani Municipal,193595.0
+193,Sunyani West Municipal,136022.0
+194,Berekum East Municipal,106252.0
+195,Berekum West,49464.0
+196,Jaman South,109768.0
+197,Jaman North,116529.0
+198,Tain,115568.0
+199,Wenchi Municipal,124758.0
+200,Banda,28179.0
+201,Nkoranza South Municipal,114642.0
+202,Techiman Municipal,243335.0
+203,Nkoranza North,56468.0
+204,Techiman North,102529.0
+205,Atebubu Amantin Municipal,144947.0
+206,Sene West,70104.0
+207,Sene East,72081.0
+208,Pru West,69820.0
+209,Pru East,100840.0
+210,Kintampo South,88384.0
+211,Kintampo North Municipal,140250.0
+212,Biakoye,71827.0
+213,Jasikan Municipal,59695.0
+214,Kadjebi,73959.0
+215,Krachi East Municipal,110435.0
+216,Krachi West Municipal,61128.0
+217,Krachi Nchumuru,79934.0
+218,Nkwanta South Municipal,135936.0
+219,Nkwanta North (Kpassa),126096.0
+220,Guan,28238.0
+221,Kpandai,126213.0
+222,Nanumba South,106374.0
+223,Nanumba North Municipal,188680.0
+224,Zabzugu,82846.0
+225,Tatale Sanguli,74805.0
+226,Saboba,95683.0
+227,Yendi Municipal,154421.0
+228,Mion,94930.0
+229,Nanton,50767.0
+230,Tamale Metropolitan Area (TMA),374744.0
+231,TMA-Tamale South,246766.0
+232,TMA-Tamale Central,127978.0
+233,Sagnarigu Municipal,341711.0
+234,Tolon,118090.0
+235,Kumbungu,110586.0
+236,Savelugu Municipal,122888.0
+237,Karaga,114225.0
+238,Gushegu Municipal,153965.0
+239,Bole,115800.0
+240,Sawla Tuna Kalba,112664.0
+241,North Gonja,61443.0
+242,West Gonja,63449.0
+243,Central Gonja,142762.0
+244,East Gonja Municipal,117755.0
+245,North East Gonja,39404.0
+246,Mamprugu Moagduri,68746.0
+247,West Mamprusi Municipal,175755.0
+248,East Mamprusi Municipal,188006.0
+249,Bunkpurugu Nakpanduri,82384.0
+250,Yunyoo Nasuan,56879.0
+251,Chereponi,87176.0
+252,Builsa South,36575.0
+253,Builsa North Municipal,56571.0
+254,Kasena Nankana Municipal,99895.0
+255,Kasena Nankana West,90735.0
+256,Bolgatanga Municipal,142509.0
+257,Talensi,87021.0
+258,Bolgatanga East,38824.0
+259,Bongo,116431.0
+260,Nabdam,53039.0
+261,Bawku West,144189.0
+262,Binduri,76679.0
+263,Bawku Municipal,119458.0
+264,Garu,71774.0
+265,Tempane,86993.0
+266,Pusiga,80533.0
+267,Wa West,96957.0
+268,Wa East,91457.0
+269,Wa Municipal,200672.0
+270,Nadowli Kaleo,77057.0
+271,Daffiama Bussie Issa,38754.0
+272,Sissala East Municipal,80619.0
+273,Sissala West,63828.0
+274,Jirapa Municipal,91279.0
+275,Lawra Municipal,58433.0
+276,Lambussie Karni,51118.0
+277,Nandom,51328.0
