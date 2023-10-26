@@ -176,5 +176,5 @@ if adj:
 
 
 st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
-ananse(df)
+ananse(df.reset_index())
 
