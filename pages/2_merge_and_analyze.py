@@ -139,4 +139,4 @@ if transformed_list:
         st.plotly_chart(fig)
 
     st.subheader(':blue[Chat with Nyansapo powered by OpenAI]')
-    ananse(transformed_dfs.reset_index())
+    ananse(transformed_dfs)
