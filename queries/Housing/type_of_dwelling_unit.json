@@ -1,0 +1,43 @@
+{
+    "query": [
+      {
+        "code": "Typeofdwelling",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Separate house (Detached)",
+            "Semi-detached house",
+            "Flat/Apartment",
+            "Compound house (rooms)",
+            "Huts/Buildings (same compound)",
+            "Tent",
+            "Metal Container",
+            "Kiosk/poly kiosk",
+            "Wooden structure",
+            "Living quarters attached to office/shop",
+            "Uncompleted building",
+            "Other"
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }

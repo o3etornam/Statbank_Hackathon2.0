@@ -1,0 +1,41 @@
+{
+    "query": [
+      {
+        "code": "Cooking_Space",
+        "selection": {
+          "filter": "item",
+          "values": [
+            "Separate room for exclusive use of household",
+            "Separate room shared with other household(s)",
+            "Enclosure without roof",
+            "Structure with roof but without walls",
+            "Bedroom/ hall / living room",
+            "Veranda/porch",
+            "Open space in compound",
+            "Other"
+          ]
+        }
+      },
+      {
+        "code": "Locality",
+        "selection": {
+          "filter": "item",
+          "values": [
+   
+          ]
+        }
+      },
+      {
+        "code": "Geographic_Area",
+        "selection": {
+          "filter": "item",
+          "values": [
+
+          ]
+        }
+      }
+    ],
+    "response": {
+      "format": "json"
+    }
+  }
